@@ -1,22 +1,38 @@
 import RevenueCard from "./revenuecard";
 import SalesChart from "./saleschart";
 import PrismAICard from "./prismaicard";
+import KpiCard from "./kpicard";
 
 function DashboardPreview() {
   return (
-    <div className="w-[430px] space-y-5 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]">
+    <div className="w-[450px] space-y-5">
 
+      {/* Revenue Card */}
       <RevenueCard />
 
+      {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-4">
 
-        <div className="col-span-1">
-          <SalesChart />
-        </div>
+        <KpiCard
+          title="Customers"
+          value="2.8K"
+          growth="12"
+        />
 
-        <div className="col-span-1">
-          <PrismAICard />
-        </div>
+        <KpiCard
+          title="Orders"
+          value="1.4K"
+          growth="18"
+        />
+
+      </div>
+
+      {/* Bottom Cards */}
+      <div className="grid grid-cols-2 gap-4">
+
+        <SalesChart />
+
+        <PrismAICard />
 
       </div>
 

@@ -1,0 +1,462 @@
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.dashboard-topbar {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8ebf0;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.topbar-search {
+  width: 320px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 13px;
+  border: 1px solid #e5e7eb;
+  border-radius: 11px;
+  background: #f8fafc;
+  color: #94a3b8;
+  box-sizing: border-box;
+}
+
+.topbar-search:focus-within {
+  border-color: #c7d2fe;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
+}
+
+.topbar-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #172033;
+  font-size: 13px;
+}
+
+.topbar-search input::placeholder {
+  color: #9aa3b2;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.topbar-notification {
+  position: relative;
+}
+
+.topbar-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 11px;
+
+  background: #ffffff;
+  color: #64748b;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.topbar-icon:hover {
+  background: #f8fafc;
+  color: #172033;
+  border-color: #d8dde7;
+}
+
+.topbar-icon:active {
+  transform: scale(0.96);
+}
+
+/* Notification dot */
+
+.notification-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: #4f46e5;
+
+  border: 2px solid #ffffff;
+}
+
+/* =========================================================
+   NOTIFICATION DROPDOWN
+========================================================= */
+
+.notification-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+
+  width: 310px;
+
+  padding: 8px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+
+  z-index: 1000;
+  animation: notificationAppear 0.18s ease;
+}
+
+.dropdown-title {
+  padding: 10px 12px;
+
+  font-size: 14px;
+  font-weight: 700;
+  color: #172033;
+
+  border-bottom: 1px solid #edf0f4;
+  margin-bottom: 5px;
+}
+
+.notification-dropdown p {
+  margin: 0;
+  padding: 11px 12px;
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: #475569;
+
+  border-radius: 9px;
+
+  cursor: default;
+  transition: background 0.2s ease;
+}
+
+.notification-dropdown p:hover {
+  background: #f8fafc;
+}
+
+@keyframes notificationAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   ADMINISTRATOR
+========================================================= */
+
+.administrator-wrapper {
+  position: relative;
+}
+
+.administrator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 8px 5px 5px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  color: #172033;
+
+  transition: all 0.2s ease;
+}
+
+.administrator:hover {
+  background: #f8fafc;
+}
+
+/* =========================================================
+   ADMIN AVATAR
+========================================================= */
+
+.administrator-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #172033;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.administrator-avatar.large {
+  width: 42px;
+  height: 42px;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   ADMIN INFO
+========================================================= */
+
+.administrator-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.administrator-info strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: #172033;
+  line-height: 1.2;
+}
+
+.administrator-info span {
+  font-size: 10px;
+  color: #8a94a6;
+  line-height: 1.2;
+}
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.administrator > svg {
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.rotate-arrow {
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+   ADMINISTRATOR DROPDOWN
+========================================================= */
+
+.administrator-menu {
+  position: absolute;
+  top: 52px;
+  right: 0;
+
+  width: 240px;
+
+  padding: 8px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+
+  z-index: 1000;
+
+  animation: adminAppear 0.18s ease;
+}
+
+@keyframes adminAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   ADMIN MENU HEADER
+========================================================= */
+
+.admin-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 10px;
+}
+
+.admin-menu-header > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.admin-menu-header strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.admin-menu-header span {
+  font-size: 10px;
+  color: #8a94a6;
+}
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.admin-menu-divider {
+  height: 1px;
+
+  margin: 5px 4px 7px;
+
+  background: #edf0f4;
+}
+
+/* =========================================================
+   MENU BUTTONS
+========================================================= */
+
+.administrator-menu button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 11px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #475569;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.administrator-menu button:hover {
+  background: #f8fafc;
+  color: #172033;
+}
+
+.administrator-menu button svg {
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.administrator-menu .dropdown-logout {
+  color: #dc2626;
+}
+
+.administrator-menu .dropdown-logout:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+  .dashboard-topbar {
+    padding: 0 20px;
+  }
+
+  .topbar-search {
+    width: 240px;
+  }
+
+  .administrator-info {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-topbar {
+    padding: 0 15px;
+  }
+
+  .topbar-search {
+    width: 180px;
+  }
+
+  .topbar-actions {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar-search {
+    width: 150px;
+  }
+
+  .administrator {
+    padding-right: 2px;
+  }
+
+  .administrator > svg {
+    display: none;
+  }
+
+  .notification-dropdown {
+    right: -50px;
+    width: 280px;
+  }
+
+  .administrator-menu {
+    right: -5px;
+  }
+}

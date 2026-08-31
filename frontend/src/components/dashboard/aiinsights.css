@@ -1,0 +1,278 @@
+/* =========================================
+   DASHBOARD PRISM AI
+   ========================================= */
+
+.dashboard-prism-card {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 24px;
+  padding: 30px;
+
+  background: linear-gradient(
+    135deg,
+    #0f2747 0%,
+    #12365f 55%,
+    #0d294a 100%
+  );
+
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  border-radius: 22px;
+
+  color: white;
+
+  box-shadow:
+    0 18px 45px rgba(15, 39, 71, 0.18);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.dashboard-prism-card::before {
+  content: "";
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  right: -90px;
+  top: -110px;
+
+  background: rgba(96, 165, 250, 0.12);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.dashboard-prism-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 24px 55px rgba(15, 39, 71, 0.24);
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.dashboard-prism-header {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.dashboard-prism-icon {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  color: #93c5fd;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-prism-title span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+
+  color: #93c5fd;
+}
+
+.dashboard-prism-title h2 {
+  margin: 0;
+
+  font-size: 24px;
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   DESCRIPTION
+   ========================================= */
+
+.dashboard-prism-description {
+  position: relative;
+  z-index: 1;
+
+  max-width: 760px;
+
+  margin: 20px 0 0;
+
+  font-size: 14px;
+  line-height: 1.75;
+
+  color: #dbeafe;
+}
+
+
+/* =========================================
+   SUGGESTED ACTION
+   ========================================= */
+
+.dashboard-prism-action {
+  position: relative;
+  z-index: 1;
+
+  margin-top: 22px;
+
+  padding: 17px 19px;
+
+  background: rgba(3, 20, 40, 0.42);
+
+  border: 1px solid rgba(147, 197, 253, 0.18);
+
+  border-radius: 15px;
+
+  backdrop-filter: blur(8px);
+}
+
+.dashboard-prism-action-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 8px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  color: #93c5fd;
+}
+
+.action-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #60a5fa;
+
+  box-shadow:
+    0 0 0 4px rgba(96, 165, 250, 0.12);
+}
+
+.dashboard-prism-action p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #f1f5f9;
+}
+
+
+/* =========================================
+   ASK PRISM AI BUTTON
+   ========================================= */
+
+.dashboard-prism-button {
+  position: relative;
+  z-index: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  margin-top: 22px;
+
+  padding: 12px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #0f2747;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.dashboard-prism-button svg:last-child {
+  transition: transform 0.25s ease;
+}
+
+.dashboard-prism-button:hover {
+  transform: translateY(-2px);
+
+  background: #eff6ff;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+.dashboard-prism-button:hover svg:last-child {
+  transform: translateX(4px);
+}
+
+.dashboard-prism-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .dashboard-prism-card {
+    padding: 23px;
+  }
+
+  .dashboard-prism-title h2 {
+    font-size: 21px;
+  }
+
+  .dashboard-prism-description {
+    font-size: 13px;
+  }
+
+  .dashboard-prism-button {
+    width: 100%;
+  }
+}

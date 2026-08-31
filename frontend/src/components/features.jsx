@@ -1,81 +1,95 @@
 function Features() {
+
   const features = [
+
     {
-      icon: "🤖",
-      title: "AI Insights",
+      number: "01",
+      title: "Your Data Has A Story.",
       description:
-        "Get intelligent business recommendations powered by AI."
+        "PulseIQ connects the scattered pieces—sales, customers, revenue and performance—so the bigger picture finally makes sense."
     },
+
     {
-      icon: "📊",
-      title: "Interactive Dashboards",
+      number: "02",
+      title: "Talk Numbers. Get Answers.",
       description:
-        "Monitor sales, revenue, and customers with beautiful dashboards."
+        "Stop hunting through spreadsheets. Ask Prism AI a business question and get a clear answer you can actually act on."
     },
+
     {
-      icon: "📁",
-      title: "CSV Upload",
+      number: "03",
+      title: "Find The Signal In The Noise.",
       description:
-        "Upload your business data in seconds and start analyzing."
+        "Not every number deserves your attention. PulseIQ helps surface the changes, patterns and opportunities that actually matter."
     },
+
     {
-      icon: "📈",
-      title: "Predictive Analytics",
+      number: "04",
+      title: "Raw Data In. Clarity Out.",
       description:
-        "Forecast trends and make smarter business decisions."
+        "Upload your CSV and let PulseIQ turn rows of data into dashboards, trends and insights that are easier to understand."
     },
+
     {
-      icon: "🔒",
-      title: "Secure Data",
+      number: "05",
+      title: "Know The Why, Not Just The What.",
       description:
-        "Enterprise-grade security to keep your business data safe."
+        "A number can tell you what happened. PulseIQ helps you understand the story behind it—and where to look next."
     },
+
     {
-      icon: "☁️",
-      title: "Cloud Access",
+      number: "06",
+      title: "Built For Your Next Move.",
       description:
-        "Access your analytics dashboard anytime from anywhere."
+        "Whether you're exploring your first dataset or scaling your analytics workflow, PulseIQ grows with the way you work."
     }
+
   ];
 
   return (
-    <section id="features" className="py-28 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-8">
 
-        <h2 className="text-5xl font-bold text-center text-gray-900">
-          Powerful Features
-        </h2>
+    <section id="features" className="home-section">
 
-        <p className="text-center text-gray-500 mt-5 max-w-2xl mx-auto">
-          Everything you need to analyze, visualize and grow your business using AI.
-        </p>
+      <span className="section-label">
+        WHAT PULSEIQ BRINGS
+      </span>
 
-        <div className="grid md:grid-cols-3 gap-8 mt-16">
+      <h2>
+        Less searching.
+        <br />
+        More knowing.
+      </h2>
 
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-3xl p-8 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="text-5xl">
-                {feature.icon}
-              </div>
+      <p className="section-intro">
+        Everything PulseIQ does is designed around one idea:
+        make business data easier to understand and harder to ignore.
+      </p>
 
-              <h3 className="text-2xl font-bold mt-6">
-                {feature.title}
-              </h3>
+      <div className="feature-grid">
 
-              <p className="text-gray-500 mt-4 leading-7">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+        {features.map((feature) => (
 
-        </div>
+          <article
+            className="feature-card"
+            key={feature.number}
+          >
+
+            <span>{feature.number}</span>
+
+            <h3>{feature.title}</h3>
+
+            <p>{feature.description}</p>
+
+          </article>
+
+        ))}
 
       </div>
+
     </section>
+
   );
+
 }
 
 export default Features;

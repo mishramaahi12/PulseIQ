@@ -1,36 +1,74 @@
 function Footer() {
+
   return (
-    <footer id="contact" className="bg-slate-950 text-white py-16">
-      <div className="max-w-7xl mx-auto px-8">
+    <footer
+      id="contact"
+      className="site-footer"
+    >
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="footer-container">
 
-          <div>
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              PulseIQ
+        <div className="footer-contact">
+
+          <div className="footer-contact-content">
+
+            <span className="footer-eyebrow">
+              LET'S TALK
+            </span>
+
+            <h2>
+              Your data has
+              <br />
+              more to say.
             </h2>
 
-            <p className="text-gray-400 mt-3 max-w-md">
-              AI-powered business intelligence platform that transforms
-              your business data into smart decisions.
+            <p>
+              Ready to turn your business numbers into
+              clearer decisions?
             </p>
+
           </div>
 
-          <div className="flex gap-8 text-gray-400">
+          <a
+            href="mailto:hello@pulseiq.com"
+            className="footer-contact-button"
+          >
+            Get in touch
+            <span>↗</span>
+          </a>
 
-            <a href="#features" className="hover:text-white transition">
+        </div>
+
+        <div className="footer-main">
+
+          <div className="footer-brand">
+
+            <h2>
+              Pulse<span>IQ</span>
+            </h2>
+
+            <p>
+              AI-powered business intelligence that turns
+              complex data into clear business decisions.
+            </p>
+
+          </div>
+
+          <div className="footer-links">
+
+            <a href="#features">
               Features
             </a>
 
-            <a href="#pricing" className="hover:text-white transition">
+            <a href="#pricing">
               Pricing
             </a>
 
-            <a href="#about" className="hover:text-white transition">
+            <a href="#about">
               About
             </a>
 
-            <a href="#contact" className="hover:text-white transition">
+            <a href="#contact">
               Contact
             </a>
 
@@ -38,11 +76,20 @@ function Footer() {
 
         </div>
 
-        <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500 text-sm">
-          © 2026 PulseIQ. All rights reserved.
+        <div className="footer-bottom">
+
+          <span>
+            © 2026 PulseIQ. All rights reserved.
+          </span>
+
+          <span>
+            Business intelligence for smarter decisions.
+          </span>
+
         </div>
 
       </div>
+
     </footer>
   );
 }

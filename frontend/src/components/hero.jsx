@@ -1,4 +1,5 @@
 import DashboardPreview from "./dashboardpreview";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -27,13 +28,19 @@ function Hero() {
           {/* BUTTONS */}
           <div className="flex flex-wrap gap-4 mt-10">
 
-            <button className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white px-8 py-4 rounded-xl font-semibold shadow-lg">
-              Get Started
-            </button>
+           <Link
+  to="/login"
+  className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white px-8 py-4 rounded-xl font-semibold shadow-lg inline-block"
+>
+  Get Started
+</Link>
 
-            <button className="border border-gray-300 hover:bg-white transition-all duration-300 px-8 py-4 rounded-xl font-semibold">
-              Live Demo
-            </button>
+            <a
+  href="#pricing"
+  className="border border-gray-300 hover:bg-white transition-all duration-300 px-8 py-4 rounded-xl font-semibold inline-block"
+>
+  Live Demo
+</a>
 
           </div>
 

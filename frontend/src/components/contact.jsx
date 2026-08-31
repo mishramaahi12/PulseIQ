@@ -1,61 +1,132 @@
+import { useState } from "react";
+import { Mail, Send, CheckCircle2 } from "lucide-react";
+
 function Contact() {
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSent(true);
+
+    setTimeout(() => {
+      setSent(false);
+    }, 3000);
+  };
+
   return (
-    <section id="contact" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-8">
+    <section className="contact-section">
+      <div className="contact-info">
+        <span className="section-label">
+          CONTACT PULSEIQ
+        </span>
 
-        <div className="text-center mb-16">
+        <h2>
+          Start a conversation.
+        </h2>
 
-          <p className="text-blue-600 font-semibold uppercase tracking-[4px]">
-            Contact
-          </p>
+        <p className="contact-description">
+          We're here to help you make better decisions
+          with your data.
+        </p>
 
-          <h2 className="text-5xl font-bold text-slate-900 mt-4">
-            Let's Build Something Great
-          </h2>
-
-          <p className="text-slate-500 mt-5 max-w-2xl mx-auto">
-            Have a question, partnership idea, or want a demo?
-            We'd love to hear from you.
-          </p>
-
-        </div>
-
-        <div className="bg-slate-50 rounded-3xl p-10 shadow-sm border border-slate-200">
-
-          <div className="grid md:grid-cols-2 gap-8">
-
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full p-4 rounded-xl border border-slate-300 outline-none focus:border-blue-500"
-            />
-
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full p-4 rounded-xl border border-slate-300 outline-none focus:border-blue-500"
-            />
-
+        <div className="contact-email-box">
+          <div className="contact-icon">
+            <Mail size={20} />
           </div>
 
-          <input
-            type="text"
-            placeholder="Company Name"
-            className="w-full p-4 rounded-xl border border-slate-300 outline-none focus:border-blue-500 mt-6"
-          />
+          <div>
+            <span>Email us</span>
 
-          <textarea
-            rows="6"
-            placeholder="Tell us about your project..."
-            className="w-full p-4 rounded-xl border border-slate-300 outline-none focus:border-blue-500 mt-6 resize-none"
-          ></textarea>
-
-          <button className="mt-8 bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition">
-            Send Message
-          </button>
-
+            <a href="mailto:pulseiq005@gmail.com">
+              pulseiq005@gmail.com
+            </a>
+          </div>
         </div>
 
+        <div className="contact-support">
+          <span>Support</span>
+
+          <p>
+            Have a question about PulseIQ, your dashboard,
+            or your data? Send us a message and we'll get
+            back to you.
+          </p>
+
+          <small>
+            We usually respond within one business day.
+          </small>
+        </div>
+      </div>
+
+      <div className="contact-form-card">
+        <div className="contact-form-header">
+          <span>Let's talk</span>
+
+          <p>
+            Tell us what you're building.
+          </p>
+        </div>
+
+        {sent ? (
+          <div className="contact-success">
+            <CheckCircle2 size={25} />
+
+            <h3>Message sent!</h3>
+
+            <p>
+              Thanks for reaching out to PulseIQ.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="contact-name">
+                Name
+              </label>
+
+              <input
+                id="contact-name"
+                type="text"
+                placeholder="Your name"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="contact-email">
+                Email
+              </label>
+
+              <input
+                id="contact-email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="contact-message">
+                Message
+              </label>
+
+              <textarea
+                id="contact-message"
+                rows="6"
+                placeholder="Tell us how we can help..."
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="contact-submit"
+            >
+              <span>Send message</span>
+              <Send size={17} />
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );

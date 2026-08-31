@@ -1,0 +1,614 @@
+/* =========================================================
+   UPLOAD DATA PAGE
+========================================================= */
+
+.upload-page-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.upload-page-card,
+.upload-guide-card,
+.upload-result-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   UPLOAD CARD
+========================================================= */
+
+.upload-page-card {
+  padding: 30px;
+}
+
+.upload-dropzone {
+  padding: 55px 30px;
+  text-align: center;
+  border: 2px dashed #cfd6e4;
+  border-radius: 18px;
+  background: #fafbfe;
+  transition: all 0.2s ease;
+}
+
+.upload-guide-card {
+  padding: 30px;
+}
+
+/* =========================================================
+   DROP ZONE
+========================================================= */
+
+.upload-dropzone {
+  padding: 55px 30px;
+  text-align: center;
+  border: 2px dashed #cfd6e4;
+  border-radius: 18px;
+  background: #fafbfe;
+  transition: all 0.2s ease;
+}
+
+.upload-dropzone:hover {
+  border-color: #8f9ab3;
+  background: #f8f9ff;
+}
+
+.upload-file-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.upload-dropzone h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.upload-dropzone > p {
+  margin: 8px 0 0;
+  color: #7b8495;
+  font-size: 13px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.upload-select-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 11px;
+  background: #172033;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.upload-select-button:hover {
+  background: #27334a;
+  transform: translateY(-1px);
+}
+
+.upload-analyze-button {
+  width: 100%;
+  margin-top: 13px;
+  padding: 13px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 11px;
+  background: #4f46e5;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.upload-analyze-button:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   SELECTED FILE
+========================================================= */
+
+.upload-selected {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #e2e6ef;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 13px;
+  text-align: left;
+}
+
+.upload-selected span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-remove {
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: #f1f3f7;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.upload-remove:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.upload-error {
+  margin-top: 16px;
+  padding: 13px 15px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.prism-loader {
+  animation: uploadSpin 0.9s linear infinite;
+}
+
+@keyframes uploadSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   GUIDE CARD
+========================================================= */
+
+.upload-guide-card {
+  padding: 30px;
+}
+
+.upload-guide-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.upload-guide-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #eaf2ff;
+  color: #2563eb;
+}
+
+.upload-guide-header h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.upload-guide-header p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+/* =========================================================
+   GUIDE LIST
+========================================================= */
+
+.upload-guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.upload-guide-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #e8edf5;
+  border-radius: 13px;
+  background: #fafcff;
+  transition: all 0.2s ease;
+}
+
+.upload-guide-item:hover {
+  transform: translateY(-2px);
+  border-color: #cbdcff;
+  background: #f6f9ff;
+}
+
+.guide-check {
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eaf2ff;
+  color: #2563eb;
+}
+
+.upload-guide-item strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 13px;
+  color: #172033;
+}
+
+.upload-guide-item span {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #718096;
+}
+
+/* =========================================================
+   EXAMPLE
+========================================================= */
+
+.upload-example {
+  margin-top: 22px;
+  padding: 17px;
+  border-radius: 14px;
+  background: #f5f8fd;
+  border: 1px solid #e2e8f0;
+}
+
+.upload-example-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.example-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.example-columns span {
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: #ffffff;
+  border: 1px solid #dce4ef;
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* =========================================================
+   TIP
+========================================================= */
+
+.upload-guide-note {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-left: 3px solid #2563eb;
+  background: #f8faff;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.upload-guide-note strong {
+  color: #2563eb;
+}
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.upload-result-card {
+  grid-column: 1 / -1;
+  padding: 26px;
+}
+
+.upload-success {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #edf0f4;
+  color: #16a34a;
+}
+
+.upload-success > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.upload-success strong {
+  color: #172033;
+  font-size: 14px;
+}
+
+.upload-success span {
+  color: #7b8495;
+  font-size: 12px;
+}
+
+.upload-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-top: 19px;
+}
+
+.upload-stat {
+  padding: 16px;
+  border: 1px solid #e5e9f0;
+  border-radius: 13px;
+  background: #f8fafc;
+}
+
+.upload-stat span {
+  display: block;
+  margin-bottom: 6px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.upload-stat strong {
+  display: block;
+  overflow: hidden;
+  color: #172033;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detected-revenue {
+  margin-top: 18px;
+  padding: 22px;
+  border-radius: 15px;
+  background: #172033;
+  color: #ffffff;
+}
+
+.detected-revenue small {
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.detected-revenue h2 {
+  margin: 5px 0 3px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.detected-revenue span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* =========================================================
+   TOPBAR - NOTIFICATION + ADMINISTRATOR
+========================================================= */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.topbar-notification {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #64748b;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.topbar-notification:hover {
+  background: #f8fafc;
+  color: #172033;
+  border-color: #d8dde7;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4f46e5;
+  border: 2px solid #ffffff;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-avatar {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #172033;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.topbar-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.topbar-user-info strong {
+  color: #172033;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.topbar-user-info span {
+  color: #8a94a6;
+  font-size: 10px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .upload-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-result-card {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .upload-page-card,
+  .upload-guide-card,
+  .upload-result-card {
+    padding: 20px;
+  }
+
+  .upload-dropzone {
+    padding: 38px 18px;
+  }
+
+  .upload-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .topbar-user-info {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-dropzone h2 {
+    font-size: 19px;
+  }
+
+  .upload-guide-header h2 {
+    font-size: 17px;
+  }
+}
+
+.upload-instructions {
+  width: 100%;
+  margin-top: 32px;
+  text-align: left;
+}
+
+.instruction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.instruction-grid > div {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.example-columns,
+.upload-tip {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.example-columns p,
+.upload-tip {
+  color: #9ca3af;
+}

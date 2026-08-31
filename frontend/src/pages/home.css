@@ -1,0 +1,5845 @@
+/* =========================================================
+   PULSEIQ HOME PAGE
+   Extra visual layer — does not remove existing components
+   ========================================================= */
+
+.home-page {
+  overflow-x: hidden;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* =========================================================
+   GLOBAL HOME ANIMATION
+   ========================================================= */
+
+@keyframes homeFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homeFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes homeGlow {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+
+  50% {
+    opacity: 0.32;
+  }
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.home-page section:first-child {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 82% 25%,
+      rgba(59, 130, 246, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 70%,
+      rgba(99, 102, 241, 0.07),
+      transparent 28%
+    ),
+    #f8fafc;
+}
+
+.home-page section:first-child::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -180px;
+  top: 80px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.07);
+  filter: blur(5px);
+  animation: homeGlow 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.home-page section:first-child > div {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero text */
+
+.home-page section:first-child h1 {
+  letter-spacing: -2.5px;
+  animation: homeFadeUp 0.7s ease both;
+}
+
+.home-page section:first-child > div > div:first-child > p:first-child {
+  animation: homeFadeUp 0.5s ease both;
+}
+
+.home-page section:first-child > div > div:first-child > p:nth-of-type(2) {
+  animation: homeFadeUp 0.9s ease both;
+}
+
+/* Hero badge */
+
+.home-page section:first-child p.inline-block {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.home-page section:first-child p.inline-block:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
+}
+
+/* Hero buttons */
+
+.home-page section:first-child a {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.home-page section:first-child a:hover {
+  transform: translateY(-3px);
+}
+
+.home-page section:first-child a[href="/login"]:hover {
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.25);
+}
+
+/* Hero stats */
+
+.home-page section:first-child h2 {
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+.home-page section:first-child h2:hover {
+  transform: translateY(-3px);
+  color: #2563eb;
+}
+
+/* =========================================================
+   DASHBOARD PREVIEW
+   ========================================================= */
+
+.home-page .w-\[450px\] {
+  animation: homeFadeUp 0.8s ease 0.15s both;
+  transition: transform 0.35s ease;
+}
+
+.home-page .w-\[450px\]:hover {
+  transform: translateY(-6px);
+}
+
+/* =========================================================
+   TRUSTED BY
+   ========================================================= */
+
+.trusted-section {
+  position: relative;
+  padding: 70px 24px;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.trusted-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trusted-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: #94a3b8;
+  margin-bottom: 35px;
+}
+
+.trusted-companies {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px;
+  align-items: center;
+}
+
+.trusted-companies div {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #64748b;
+  opacity: 0.7;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.trusted-companies div:hover {
+  color: #2563eb;
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+/* =========================================================
+   COMMON SECTION
+   ========================================================= */
+
+.home-section {
+  position: relative;
+  padding: 120px 7%;
+  background: #f8fafc;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #2563eb;
+  margin-bottom: 18px;
+}
+
+.home-section h2,
+.why-section h2,
+.pricing-heading h2,
+.contact-info h2 {
+  letter-spacing: -1.8px;
+}
+
+.section-intro {
+  max-width: 650px;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.feature-grid {
+  margin-top: 55px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  position: relative;
+  min-height: 250px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  overflow: hidden;
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  right: -60px;
+  bottom: -60px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.06);
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-9px);
+  border-color: #bfdbfe;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+}
+
+.feature-card:hover::before {
+  transform: scale(2);
+}
+
+.feature-card > span {
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  color: #2563eb;
+  margin-bottom: 30px;
+}
+
+.feature-card h3 {
+  position: relative;
+  z-index: 2;
+  font-size: 20px;
+  margin-bottom: 14px;
+  letter-spacing: -0.4px;
+}
+
+.feature-card p {
+  position: relative;
+  z-index: 2;
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* =========================================================
+   WHY PULSEIQ
+   ========================================================= */
+
+.why-section {
+  position: relative;
+  padding: 120px 7%;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.why-section::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  right: -150px;
+  top: 80px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.05);
+  pointer-events: none;
+}
+
+.why-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-heading {
+  max-width: 700px;
+}
+
+.why-heading h2 span {
+  color: #2563eb;
+}
+
+.why-heading > p {
+  margin-top: 20px;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+.why-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.why-card {
+  position: relative;
+  min-height: 270px;
+  padding: 34px;
+  border-radius: 22px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+  background: #ffffff;
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.08);
+}
+
+.why-number {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  color: #2563eb;
+  margin-bottom: 35px;
+}
+
+.why-card h3 {
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.why-card p {
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.why-arrow {
+  position: absolute;
+  right: 28px;
+  bottom: 25px;
+  font-size: 24px;
+  color: #2563eb;
+  transition: transform 0.3s ease;
+}
+
+.why-card:hover .why-arrow {
+  transform: translate(5px, -5px);
+}
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+
+.pricing-section {
+  position: relative;
+  padding: 120px 7%;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+/* IMPORTANT:
+   Remove any old oval/bubble/pseudo decoration behind pricing
+*/
+
+.pricing-section::before,
+.pricing-section::after {
+  content: none !important;
+  display: none !important;
+}
+
+.pricing-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.pricing-heading {
+  max-width: 650px;
+  margin-bottom: 55px;
+}
+
+.pricing-heading p {
+  color: #64748b;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.pricing-card {
+  position: relative;
+  padding: 35px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* Remove old bubble shapes */
+
+.pricing-card::before,
+.pricing-card::after {
+  content: none !important;
+  display: none !important;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  border-color: #bfdbfe;
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.09);
+}
+
+.pricing-card.popular {
+  border: 2px solid #2563eb;
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.12);
+}
+
+.pricing-card.popular:hover {
+  box-shadow: 0 28px 60px rgba(37, 99, 235, 0.18);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -13px;
+  left: 28px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.pricing-card h3 {
+  font-size: 23px;
+  letter-spacing: -0.5px;
+}
+
+.coming-soon-price {
+  margin-top: 22px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.price-note {
+  margin-top: 5px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pricing-card li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.pricing-card li svg {
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.pricing-button {
+  margin-top: auto;
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 13px;
+  background: #f1f5f9;
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 700;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.pricing-button:hover {
+  background: #2563eb;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.pricing-card.popular .pricing-button {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.pricing-card.popular .pricing-button:hover {
+  background: #1d4ed8;
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact-section {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 7%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: #ffffff;
+}
+
+.contact-info h2 {
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1.05;
+  margin-top: 10px;
+}
+
+.contact-description {
+  margin-top: 22px;
+  max-width: 500px;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+.contact-email-box {
+  margin-top: 35px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #f8fafc;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.contact-email-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.07);
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.contact-email-box span {
+  display: block;
+  color: #94a3b8;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.contact-email-box a {
+  color: #0f172a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-support {
+  margin-top: 35px;
+}
+
+.contact-support > span {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.contact-support p {
+  margin-top: 10px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.contact-support small {
+  display: block;
+  margin-top: 10px;
+  color: #94a3b8;
+}
+
+/* Contact form */
+
+.contact-form-card {
+  padding: 35px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+}
+
+.contact-form-header span {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.contact-form-header p {
+  margin-top: 6px;
+  color: #64748b;
+}
+
+.contact-form-card form {
+  margin-top: 28px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dbe3ed;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 13px 14px;
+  font: inherit;
+  color: #0f172a;
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.contact-submit {
+  width: 100%;
+  min-height: 50px;
+  border: none;
+  border-radius: 13px;
+  background: #2563eb;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.contact-submit:hover {
+  transform: translateY(-3px);
+  background: #1d4ed8;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+}
+
+.contact-success {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #2563eb;
+}
+
+.contact-success h3 {
+  margin-top: 14px;
+  color: #0f172a;
+}
+
+.contact-success p {
+  margin-top: 6px;
+  color: #64748b;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .feature-grid,
+  .why-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .trusted-companies {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page section:first-child {
+    min-height: auto;
+  }
+
+  .home-section,
+  .why-section,
+  .pricing-section,
+  .contact-section {
+    padding: 80px 20px;
+  }
+
+  .feature-grid,
+  .why-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trusted-section {
+    padding: 55px 20px;
+  }
+
+  .trusted-companies {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .trusted-companies div {
+    font-size: 17px;
+  }
+
+  .pricing-card {
+    min-height: auto;
+  }
+
+  .contact-form-card {
+    padding: 24px;
+  }
+
+  .contact-info h2 {
+    font-size: 42px;
+  }
+
+  .home-page .w-\[450px\] {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
+/* =========================================================
+   REDUCE MOTION FOR MOBILE / ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   PULSEIQ — HOME PAGE ENHANCEMENTS
+   ========================================================= */
+
+/* ---------- GLOBAL HOME ANIMATION ---------- */
+
+@keyframes homeFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homeFadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes homeFadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes softFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 18px 45px rgba(37, 99, 235, 0.22);
+  }
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-section,
+section.bg-slate-50 {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background — NOT an oval/bubble */
+.hero-section::before,
+section.bg-slate-50::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -180px;
+  top: 100px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.045);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+section.bg-slate-50 > div {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Hero left content */
+
+section.bg-slate-50 > div > div:first-child {
+  animation: homeFadeLeft 0.8s ease both;
+}
+
+
+/* Hero dashboard */
+
+section.bg-slate-50 > div > div:last-child {
+  animation: homeFadeRight 0.9s ease 0.15s both;
+}
+
+
+/* Hero badge */
+
+section.bg-slate-50 .inline-block {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+section.bg-slate-50 .inline-block:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.14);
+}
+
+
+/* Hero heading */
+
+section.bg-slate-50 h1 {
+  letter-spacing: -0.045em;
+}
+
+
+/* Get Started */
+
+section.bg-slate-50 a[href="/login"] {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+section.bg-slate-50 a[href="/login"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.25),
+    transparent 75%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+section.bg-slate-50 a[href="/login"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.25);
+}
+
+section.bg-slate-50 a[href="/login"]:hover::after {
+  transform: translateX(120%);
+}
+
+
+/* Live Demo */
+
+section.bg-slate-50 a[href="#pricing"] {
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+section.bg-slate-50 a[href="#pricing"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+
+/* Stats */
+
+section.bg-slate-50 .text-3xl {
+  transition: transform 0.3s ease;
+}
+
+section.bg-slate-50 .text-3xl:hover {
+  transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   DASHBOARD PREVIEW
+   ========================================================= */
+
+section.bg-slate-50 .w-\[450px\] {
+  animation: softFloat 5s ease-in-out infinite;
+}
+
+section.bg-slate-50 .w-\[450px\] > * {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+section.bg-slate-50 .w-\[450px\] > *:hover {
+  transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   TRUSTED BY
+   ========================================================= */
+
+.trusted-section {
+  position: relative;
+  padding: 58px 24px;
+  background: #ffffff;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.trusted-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.trusted-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+
+.trusted-companies {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  gap: 30px;
+}
+
+.trusted-companies div {
+  text-align: center;
+  font-size: 19px;
+  font-weight: 700;
+  color: #94a3b8;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.trusted-companies div:hover {
+  color: #334155;
+  transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.home-section {
+  position: relative;
+  padding: 120px 7%;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.home-section::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  left: -120px;
+  top: 120px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.035);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.home-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #2563eb;
+  margin-bottom: 18px;
+}
+
+.home-section > h2 {
+  max-width: 700px;
+  margin: 0;
+  font-size: clamp(40px, 5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: #0f172a;
+}
+
+.section-intro {
+  max-width: 650px;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #64748b;
+}
+
+.feature-grid {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.feature-card {
+  position: relative;
+  min-height: 250px;
+  padding: 30px;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.88);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* =========================================================
+   NEW FEATURES ANIMATION
+   ========================================================= */
+
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+/* Soft moving light */
+.feature-card::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.13),
+    transparent 70%
+  );
+  top: -100px;
+  right: -100px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s ease;
+  pointer-events: none;
+}
+
+/* Small accent line */
+.feature-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #2563eb;
+  transition: width 0.45s ease;
+}
+
+/* Hover */
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.015);
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.11);
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.feature-card:hover::after {
+  width: 100%;
+}
+
+/* Number animation */
+.feature-number {
+  display: inline-block;
+  transition:
+    transform 0.45s ease,
+    color 0.45s ease;
+}
+
+.feature-card:hover .feature-number {
+  transform: translateX(6px);
+  color: #2563eb;
+}
+
+/* Heading movement */
+.feature-card h3 {
+  transition:
+    transform 0.4s ease,
+    color 0.4s ease;
+}
+
+.feature-card:hover h3 {
+  transform: translateX(5px);
+  color: #2563eb;
+}
+
+/* Description */
+.feature-card p {
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover p {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-card:hover h3,
+  .feature-card:hover p,
+  .feature-card:hover .feature-number {
+    transform: none;
+  }
+
+}
+.feature-card > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 30px;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.feature-card h3 {
+  margin-top: 35px;
+  font-size: 23px;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.feature-card p {
+  margin-top: 12px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   WHY PULSEIQ
+   ========================================================= */
+
+.why-section {
+  position: relative;
+  padding: 120px 7%;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.why-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.why-heading {
+  max-width: 760px;
+}
+
+.why-heading h2 {
+  margin: 0;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #0f172a;
+}
+
+.why-heading h2 span {
+  color: #2563eb;
+}
+
+.why-heading p {
+  max-width: 680px;
+  margin-top: 24px;
+  color: #64748b;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+.why-grid {
+  margin-top: 65px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.why-card {
+  position: relative;
+  min-height: 270px;
+  padding: 32px;
+  border-radius: 22px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+  background: #ffffff;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.09);
+}
+
+.why-number {
+  font-size: 12px;
+  font-weight: 800;
+  color: #2563eb;
+  letter-spacing: 0.12em;
+}
+
+.why-card h3 {
+  margin-top: 48px;
+  font-size: 25px;
+  color: #0f172a;
+}
+
+.why-card p {
+  margin-top: 12px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.why-arrow {
+  position: absolute;
+  right: 28px;
+  top: 25px;
+  font-size: 25px;
+  color: #cbd5e1;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.why-card:hover .why-arrow {
+  transform: translate(4px, -4px);
+  color: #2563eb;
+}
+
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+
+.pricing-section {
+  position: relative;
+  padding: 120px 7%;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+/* Remove old oval / bubble */
+.pricing-section::before,
+.pricing-section::after {
+  display: none !important;
+  content: none !important;
+}
+
+.pricing-container {
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-heading {
+  max-width: 650px;
+}
+
+.pricing-heading h2 {
+  margin: 0;
+  font-size: clamp(40px, 5vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #0f172a;
+}
+
+.pricing-heading p {
+  margin-top: 22px;
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+/* =========================================================
+   PRICING GRID
+   ========================================================= */
+
+.pricing-grid {
+  margin-top: 65px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+/* =========================================================
+   PRICING CARD
+   ========================================================= */
+
+.pricing-card {
+  position: relative;
+  min-height: 540px;
+  padding: 34px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
+
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Hover animation */
+
+.pricing-card:hover {
+  transform: translateY(-14px);
+  box-shadow: 0 28px 65px rgba(15, 23, 42, 0.13);
+  border-color: rgba(37, 99, 235, 0.18);
+}
+
+/* =========================================================
+   POPULAR CARD
+   ========================================================= */
+
+.pricing-card.popular {
+  border: 1px solid rgba(37, 99, 235, 0.28);
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.09);
+}
+
+.pricing-card.popular:hover {
+  transform: translateY(-17px);
+  box-shadow: 0 32px 70px rgba(37, 99, 235, 0.15);
+}
+
+.popular-badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 8px;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.pricing-card h3 {
+  margin-top: 24px;
+  margin-bottom: 0;
+
+  font-size: 25px;
+  color: #0f172a;
+}
+
+.coming-soon-price {
+  margin-top: 25px;
+
+  font-size: 28px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.price-note {
+  margin-top: 7px;
+
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 0;
+
+  display: grid;
+  gap: 15px;
+
+  flex: 1;
+}
+
+.pricing-card li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.pricing-card li svg {
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   GET STARTED BUTTON
+   ========================================================= */
+
+.pricing-button {
+  position: relative;
+
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+
+  margin-top: 28px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  border-radius: 12px;
+
+  background: #f1f5f9;
+  color: #0f172a;
+
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.pricing-button:hover {
+  background: #2563eb;
+  color: #ffffff;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+}
+
+.pricing-button svg {
+  transition: transform 0.3s ease;
+}
+
+.pricing-button:hover svg {
+  transform: translateX(5px);
+}
+
+/* Popular button */
+
+.pricing-card.popular .pricing-button {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.pricing-card.popular .pricing-button:hover {
+  background: #1d4ed8;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .pricing-section {
+    padding: 90px 6%;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .pricing-card {
+    min-height: 500px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .pricing-section {
+    padding: 75px 6%;
+  }
+
+  .pricing-heading h2 {
+    font-size: 40px;
+  }
+
+  .pricing-heading p {
+    font-size: 15px;
+  }
+
+  .pricing-grid {
+    margin-top: 45px;
+  }
+
+  .pricing-card {
+    min-height: auto;
+    padding: 28px;
+  }
+
+  .pricing-card ul {
+    margin-top: 28px;
+    flex: none;
+  }
+
+  /* =========================================================
+   PRICING CTA BUTTON
+   ========================================================= */
+
+.pricing-button {
+  width: 100%;
+  height: 50px;
+  min-height: 50px;
+
+  margin-top: 28px;
+  padding: 0 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 13px;
+
+  background: #0f172a;
+  color: #ffffff;
+
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+
+  border: 1px solid #0f172a;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.pricing-button:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(37, 99, 235, 0.25);
+}
+
+.pricing-button svg {
+  transition: transform 0.3s ease;
+}
+
+.pricing-button:hover svg {
+  transform: translateX(5px);
+}
+
+/* Popular card gets a stronger CTA */
+
+.pricing-card.popular .pricing-button {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.16);
+}
+
+.pricing-card.popular .pricing-button:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28);
+}
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact-section {
+  position: relative;
+  padding: 120px 7%;
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.contact-info h2 {
+  margin: 0;
+  font-size: clamp(40px, 5vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #0f172a;
+}
+
+.contact-description {
+  margin-top: 22px;
+  color: #64748b;
+  line-height: 1.8;
+  font-size: 17px;
+  max-width: 500px;
+}
+
+.contact-email-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 35px;
+  padding: 18px;
+  max-width: 430px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.contact-email-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+}
+
+.contact-icon {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.contact-email-box span {
+  display: block;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.contact-email-box a {
+  display: inline-block;
+  margin-top: 4px;
+  color: #0f172a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-support {
+  margin-top: 35px;
+}
+
+.contact-support > span {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.contact-support p {
+  margin-top: 9px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.contact-support small {
+  display: block;
+  margin-top: 10px;
+  color: #94a3b8;
+}
+
+
+/* Contact form */
+
+.contact-form-card {
+  padding: 38px;
+  border-radius: 25px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 15px 45px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.contact-form-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.1);
+}
+
+.contact-form-header span {
+  font-size: 25px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.contact-form-header p {
+  margin-top: 7px;
+  color: #64748b;
+}
+
+.contact-form-card form {
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 19px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #0f172a;
+  outline: none;
+  font-family: inherit;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.contact-submit {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.contact-submit:hover {
+  transform: translateY(-3px);
+  background: #1d4ed8;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22);
+}
+
+.contact-success {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #2563eb;
+}
+
+.contact-success h3 {
+  margin-top: 18px;
+  color: #0f172a;
+}
+
+.contact-success p {
+  margin-top: 8px;
+  color: #64748b;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  section.bg-slate-50 {
+    min-height: auto;
+  }
+
+  section.bg-slate-50 > div {
+    padding-top: 90px;
+    padding-bottom: 80px;
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  section.bg-slate-50 h1 {
+    font-size: clamp(42px, 10vw, 58px);
+  }
+
+  section.bg-slate-50 > div > div:last-child {
+    justify-content: center;
+  }
+
+  section.bg-slate-50 .w-\[450px\] {
+    width: min(450px, 100%);
+  }
+
+  .feature-grid,
+  .why-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-card {
+    min-height: 460px;
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .trusted-companies {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .home-section,
+  .why-section,
+  .pricing-section,
+  .contact-section {
+    padding: 80px 20px;
+  }
+
+  section.bg-slate-50 > div {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  section.bg-slate-50 h1 {
+    font-size: 43px;
+  }
+
+  section.bg-slate-50 .text-lg {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  section.bg-slate-50 .flex-wrap {
+    gap: 12px;
+  }
+
+  section.bg-slate-50 a[href="/login"],
+  section.bg-slate-50 a[href="#pricing"] {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .feature-grid,
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card,
+  .why-card {
+    min-height: auto;
+  }
+
+  .feature-card h3 {
+    margin-top: 25px;
+  }
+
+  .why-card h3 {
+    margin-top: 35px;
+  }
+
+  .trusted-section {
+    padding: 45px 20px;
+  }
+
+  .trusted-companies {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 15px;
+  }
+
+  .trusted-companies div {
+    font-size: 16px;
+  }
+
+  .pricing-grid {
+    margin-top: 45px;
+  }
+
+  .pricing-card {
+    padding: 28px;
+  }
+
+  .pricing-button {
+    left: 28px;
+    right: 28px;
+  }
+
+  .contact-form-card {
+    padding: 25px;
+  }
+
+  .contact-email-box {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+/* =========================================================
+   REDUCE MOTION FOR USERS WHO PREFER IT
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   FINAL MOBILE CLOSING FIX
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .pricing-section {
+    padding: 75px 6%;
+  }
+
+  .pricing-heading h2 {
+    font-size: 40px;
+  }
+
+  .pricing-heading p {
+    font-size: 15px;
+  }
+
+  .pricing-grid {
+    margin-top: 45px;
+  }
+
+  .pricing-card {
+    min-height: auto;
+    padding: 28px;
+  }
+
+  .pricing-card ul {
+    margin-top: 28px;
+    flex: none;
+  }
+
+  .pricing-button {
+    margin-top: 28px;
+  }
+}
+
+/* =========================================================
+   FINAL PRICING DESIGN
+   Put this at the VERY END of home.css
+   ========================================================= */
+
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  padding: 34px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-12px);
+  border-color: rgba(37, 99, 235, 0.25);
+
+  box-shadow:
+    0 25px 55px rgba(15, 23, 42, 0.12);
+}
+
+
+/* ---------- POPULAR CARD ---------- */
+
+.pricing-card.popular {
+  border: 1px solid rgba(37, 99, 235, 0.35);
+
+  box-shadow:
+    0 15px 40px rgba(37, 99, 235, 0.10);
+}
+
+.pricing-card.popular:hover {
+  transform: translateY(-15px);
+
+  box-shadow:
+    0 30px 65px rgba(37, 99, 235, 0.18);
+}
+
+
+/* ---------- FEATURES ---------- */
+
+.pricing-card ul {
+  flex: 1;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pricing-card li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.pricing-card li svg {
+  flex-shrink: 0;
+  color: #2563eb;
+}
+
+
+/* =========================================================
+   GET STARTED BUTTON
+   ========================================================= */
+
+.pricing-button {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: 100% !important;
+  height: 50px !important;
+  min-height: 50px !important;
+
+  margin-top: 30px !important;
+  padding: 0 18px !important;
+
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px;
+
+  border-radius: 13px;
+
+  background: #0f172a !important;
+  border: 1px solid #0f172a !important;
+
+  color: #ffffff !important;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease !important;
+}
+
+
+/* NORMAL CARD HOVER */
+
+.pricing-button:hover {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+
+  color: #ffffff !important;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(37, 99, 235, 0.25);
+}
+
+
+/* ARROW ANIMATION */
+
+.pricing-button svg {
+  transition: transform 0.3s ease;
+}
+
+.pricing-button:hover svg {
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   POPULAR CARD BUTTON
+   ========================================================= */
+
+.pricing-card.popular .pricing-button {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+
+  color: #ffffff !important;
+
+  box-shadow:
+    0 8px 22px rgba(37, 99, 235, 0.18);
+}
+
+.pricing-card.popular .pricing-button:hover {
+  background: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+
+  box-shadow:
+    0 14px 32px rgba(37, 99, 235, 0.28);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .pricing-section {
+    padding: 80px 6%;
+  }
+
+  .pricing-card {
+    min-height: auto;
+    padding: 28px;
+  }
+
+  .pricing-button {
+    width: 100% !important;
+    margin-top: 28px !important;
+  }
+}
+
+/* =========================================================
+   WHY PULSEIQ - PREMIUM INTERACTION
+   ========================================================= */
+
+.why-section {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 7%;
+  background: #ffffff;
+}
+
+/* subtle background glow */
+
+.why-section::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -180px;
+  right: -150px;
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.07),
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.why-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.why-heading {
+  max-width: 760px;
+  margin-bottom: 65px;
+}
+
+.why-heading h2 {
+  margin: 14px 0 0;
+  font-size: clamp(42px, 5vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  color: #0f172a;
+}
+
+.why-heading h2 span {
+  color: #2563eb;
+}
+
+.why-heading p {
+  max-width: 650px;
+  margin-top: 24px;
+  color: #64748b;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.why-card {
+  position: relative;
+  min-height: 300px;
+  padding: 34px;
+  border-radius: 24px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease,
+    background 0.45s ease;
+}
+
+/* animated top line */
+
+.why-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 3px;
+  background: #2563eb;
+
+  transition: width 0.45s ease;
+}
+
+/* soft hover glow */
+
+.why-card::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -100px;
+  bottom: -100px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.08);
+
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+
+  opacity: 0;
+}
+
+/* hover */
+
+.why-card:hover {
+  transform: translateY(-10px);
+  background: #ffffff;
+  border-color: rgba(37, 99, 235, 0.18);
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.10);
+}
+
+.why-card:hover::before {
+  width: 100%;
+}
+
+.why-card:hover::after {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.why-number {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #eaf1ff;
+  color: #2563eb;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease;
+}
+
+.why-card:hover .why-number {
+  transform: rotate(-6deg) scale(1.08);
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.why-card h3 {
+  margin-top: 32px;
+  font-size: 23px;
+  line-height: 1.2;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+
+  transition: transform 0.4s ease;
+}
+
+.why-card:hover h3 {
+  transform: translateX(3px);
+}
+
+.why-card p {
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 310px;
+}
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.why-arrow {
+  margin-top: auto;
+  align-self: flex-end;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #64748b;
+
+  font-size: 18px;
+
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+.why-card:hover .why-arrow {
+  transform: translate(3px, -3px) rotate(5deg);
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-card {
+    min-height: 270px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .why-section {
+    padding: 80px 6%;
+  }
+
+  .why-heading {
+    margin-bottom: 45px;
+  }
+
+  .why-heading h2 {
+    font-size: 42px;
+  }
+
+  .why-heading p {
+    font-size: 15px;
+  }
+
+  .why-grid {
+    gap: 16px;
+  }
+
+  .why-card {
+    min-height: 260px;
+    padding: 28px;
+    border-radius: 20px;
+  }
+
+  .why-card h3 {
+    font-size: 21px;
+    margin-top: 25px;
+  }
+
+}
+
+/* =========================================================
+   PULSEIQ — NEW PREMIUM BACKGROUND ANIMATION
+   No circles / no bubbles
+   ========================================================= */
+
+/* HERO — subtle data grid */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(
+      rgba(37, 99, 235, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(37, 99, 235, 0.035) 1px,
+      transparent 1px
+    );
+  background-size: 55px 55px;
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    rgba(0, 0, 0, 0.45),
+    transparent
+  );
+  animation: gridMove 16s linear infinite;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: 7%;
+  top: 18%;
+  z-index: -1;
+
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.12) 0%,
+    rgba(37, 99, 235, 0.06) 35%,
+    transparent 70%
+  );
+
+  filter: blur(12px);
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+
+/* Moving grid */
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 55px 55px;
+  }
+}
+
+
+/* Soft glow — NOT a circle */
+@keyframes glowPulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   DASHBOARD PREVIEW — FLOATING EFFECT
+   ========================================================= */
+
+.hero-preview {
+  animation: dashboardFloat 5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes dashboardFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+/* =========================================================
+   FEATURE CARDS — SMART HOVER
+   ========================================================= */
+
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #2563eb,
+    #22d3ee,
+    transparent
+  );
+
+  transition: left 0.6s ease;
+}
+
+.feature-card:hover::before {
+  left: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 45px rgba(15, 23, 42, 0.09);
+  border-color: rgba(37, 99, 235, 0.18);
+}
+
+
+/* Number animation */
+.feature-number {
+  transition:
+    transform 0.4s ease,
+    color 0.4s ease;
+}
+
+.feature-card:hover .feature-number {
+  transform: translateX(5px);
+  color: #2563eb;
+}
+
+
+/* =========================================================
+   WHY CARDS — DIFFERENT HOVER
+   ========================================================= */
+
+.why-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.why-card::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -60px;
+  bottom: -60px;
+
+  background: rgba(37, 99, 235, 0.06);
+
+  transform: rotate(45deg);
+  transition:
+    transform 0.5s ease,
+    background 0.5s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-7px);
+  box-shadow:
+    0 22px 50px rgba(15, 23, 42, 0.08);
+}
+
+.why-card:hover::after {
+  transform: rotate(45deg) scale(1.6);
+  background: rgba(34, 211, 238, 0.08);
+}
+
+
+/* =========================================================
+   ABOUT SECTION — MOVING ACCENT LINE
+   ========================================================= */
+
+.about-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 80px;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #22d3ee,
+    transparent
+  );
+
+  animation: accentMove 4s ease-in-out infinite;
+}
+
+@keyframes accentMove {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateX(120px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-20px);
+    opacity: 0.4;
+  }
+}
+
+
+/* =========================================================
+   REDUCE MOTION FOR PHONES / ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section::before,
+  .hero-section::after,
+  .hero-preview,
+  .about-section::before {
+    animation: none;
+  }
+
+  .feature-card,
+  .why-card {
+    transition: none;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .hero-section::before {
+    background-size: 38px 38px;
+  }
+
+  .hero-section::after {
+    width: 260px;
+    height: 260px;
+    right: -80px;
+    top: 25%;
+  }
+
+  .hero-preview {
+    animation-duration: 6s;
+  }
+
+  .feature-card:hover,
+  .why-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* =========================================================
+   PULSEIQ CLEAN PREMIUM ANIMATION
+   NO BUBBLES • NO CIRCLES • NO GLOW
+   ========================================================= */
+
+/* Remove ALL old hero bubbles */
+.hero-section::before,
+.hero-section::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =========================
+   HERO — MOVING DATA LINES
+   ========================= */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section {
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 49.8%,
+      rgba(15, 23, 42, 0.035) 50%,
+      transparent 50.2%
+    );
+  background-size: 180px 100%;
+  animation: dataLines 18s linear infinite;
+}
+
+@keyframes dataLines {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 180px 0;
+  }
+}
+
+
+/* =========================
+   HERO CONTENT — ENTRY
+   ========================= */
+
+.hero-copy {
+  animation: heroEnter 0.8s ease-out both;
+}
+
+.hero-preview {
+  animation: previewEnter 0.9s ease-out both,
+             previewFloat 6s ease-in-out 1s infinite;
+}
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes previewEnter {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes previewFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+
+/* =========================
+   FEATURE CARDS
+   ========================= */
+
+.feature-card {
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+
+/* Animated top line */
+.feature-card::before {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 100%;
+  height: 2px;
+
+  background: #2563eb;
+
+  transition: left 0.6s ease;
+}
+
+.feature-card:hover::before {
+  left: 120%;
+}
+
+
+/* Hover */
+.feature-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.09);
+
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+
+/* Number */
+.feature-number {
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease;
+}
+
+.feature-card:hover .feature-number {
+  transform: translateX(6px);
+  color: #2563eb;
+}
+
+
+/* Heading */
+.feature-card h3 {
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease;
+}
+
+.feature-card:hover h3 {
+  transform: translateX(4px);
+  color: #2563eb;
+}
+
+
+/* =========================
+   WHY CARDS
+   ========================= */
+
+.why-card {
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.08);
+
+  border-color: rgba(37, 99, 235, 0.18);
+}
+
+
+/* =========================
+   ABOUT — MOVING UNDERLINE
+   ========================= */
+
+.about-section {
+  position: relative;
+}
+
+.about-section::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 55px;
+  height: 2px;
+
+  background: #2563eb;
+
+  animation: aboutLine 3.5s ease-in-out infinite;
+}
+
+@keyframes aboutLine {
+  0% {
+    transform: translateX(0);
+    width: 40px;
+  }
+
+  50% {
+    transform: translateX(80px);
+    width: 70px;
+  }
+
+  100% {
+    transform: translateX(0);
+    width: 40px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .hero-section {
+    animation: none;
+    background-image: none;
+  }
+
+  .hero-preview {
+    animation:
+      previewEnter 0.8s ease-out both,
+      previewFloat 7s ease-in-out 1s infinite;
+  }
+
+  .feature-card:hover,
+  .why-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* =========================================================
+   CONTACT LEFT SIDE — LOGIN/SIGNUP STYLE
+   RIGHT FORM CARD REMAINS UNCHANGED
+   ========================================================= */
+
+.contact-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* LEFT CONTACT INFO ONLY */
+.contact-info {
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #172554 55%,
+    #1e3a8a 100%
+  );
+
+  color: #ffffff;
+  border-radius: 28px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle premium lines — no bubble */
+.contact-info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -80px;
+  width: 220px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  transform: rotate(-35deg);
+}
+
+.contact-info::after {
+  content: "";
+  position: absolute;
+  bottom: 55px;
+  right: -40px;
+  width: 180px;
+  height: 1px;
+  background: rgba(34, 211, 238, 0.35);
+  transform: rotate(-35deg);
+}
+
+/* heading */
+.contact-info h2 {
+  color: #ffffff;
+}
+
+/* description */
+.contact-info .contact-description {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* email box */
+.contact-info .contact-email-box {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 18px;
+  backdrop-filter: blur(8px);
+}
+
+/* email icon */
+.contact-info .contact-icon {
+  background: rgba(34, 211, 238, 0.12);
+  color: #67e8f9;
+}
+
+/* email label */
+.contact-info .contact-email-box span {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* email address */
+.contact-info .contact-email-box a {
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.contact-info .contact-email-box a:hover {
+  color: #67e8f9;
+}
+
+/* support */
+.contact-info .contact-support {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.contact-info .contact-support span {
+  color: #67e8f9;
+}
+
+.contact-info .contact-support p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-info .contact-support small {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .contact-info {
+    padding: 32px 24px;
+    border-radius: 22px;
+  }
+}
+
+/* =========================================================
+   CONTACT LEFT PANEL — FINAL VISIBILITY + EMAIL HIGHLIGHT
+   ========================================================= */
+
+.contact-info {
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #172554 55%,
+    #1e3a8a 100%
+  ) !important;
+
+  color: #ffffff !important;
+  border-radius: 28px;
+  padding: 48px;
+}
+
+/* Section label */
+.contact-info .section-label {
+  color: #67e8f9 !important;
+  font-weight: 800;
+}
+
+/* Main heading */
+.contact-info h2 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Description */
+.contact-info .contact-description {
+  color: #e2e8f0 !important;
+  opacity: 1 !important;
+}
+
+
+/* =========================================================
+   EMAIL — STRONG HIGHLIGHT
+   ========================================================= */
+
+.contact-info .contact-email-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 30px;
+  padding: 20px;
+
+  background: rgba(255, 255, 255, 0.11) !important;
+  border: 1px solid rgba(103, 232, 249, 0.3) !important;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15);
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.contact-info .contact-email-box:hover {
+  transform: translateY(-4px);
+
+  background: rgba(255, 255, 255, 0.15) !important;
+
+  border-color: rgba(103, 232, 249, 0.55) !important;
+}
+
+
+/* Email icon */
+.contact-info .contact-icon {
+  flex-shrink: 0;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: rgba(103, 232, 249, 0.14) !important;
+
+  color: #67e8f9 !important;
+
+  border: 1px solid rgba(103, 232, 249, 0.2);
+}
+
+
+/* Email label */
+.contact-info .contact-email-box span {
+  display: block;
+
+  color: #cbd5e1 !important;
+
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+
+/* Email address */
+.contact-info .contact-email-box a {
+  display: inline-block;
+
+  color: #ffffff !important;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  word-break: break-word;
+
+  transition: color 0.25s ease;
+}
+
+.contact-info .contact-email-box a:hover {
+  color: #67e8f9 !important;
+}
+
+
+/* =========================================================
+   SUPPORT — CLEAR & VISIBLE
+   ========================================================= */
+
+.contact-info .contact-support {
+  margin-top: 32px;
+  padding-top: 26px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.contact-info .contact-support > span {
+  display: block;
+
+  color: #67e8f9 !important;
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.contact-info .contact-support p {
+  color: #e2e8f0 !important;
+
+  line-height: 1.7;
+  opacity: 1 !important;
+}
+
+.contact-info .contact-support small {
+  display: block;
+
+  margin-top: 12px;
+
+  color: #94a3b8 !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .contact-info {
+    padding: 32px 24px;
+    border-radius: 22px;
+  }
+
+  .contact-info .contact-email-box {
+    padding: 16px;
+  }
+
+  .contact-info .contact-email-box a {
+    font-size: 14px;
+  }
+}
+/* CONTACT HEADING — FORCE WHITE */
+.contact-info h2,
+.contact-info .contact-description {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.contact-info h2 {
+  font-weight: 700 !important;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+}
+
+.contact-info .contact-description {
+  color: #e2e8f0 !important;
+}
+
+/* =========================================
+   CONTACT — LEFT BIGGER / RIGHT SMALLER
+   ========================================= */
+
+.contact-section {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 55px;
+  align-items: stretch;
+}
+
+/* LEFT CONTACT BOX */
+.contact-info {
+  min-height: 600px;
+  padding: 55px;
+  border-radius: 30px;
+  background: linear-gradient(
+    145deg,
+    #0f172a 0%,
+    #172554 55%,
+    #1e3a8a 100%
+  );
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* RIGHT LET'S TALK BOX */
+.contact-form-card {
+  min-height: 540px;
+  padding: 40px;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+/* CONTACT HEADING */
+.contact-info h2 {
+  color: #ffffff !important;
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: 1.05;
+  margin: 18px 0 20px;
+}
+
+/* DESCRIPTION */
+.contact-info .contact-description {
+  color: #dbeafe !important;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* EMAIL HIGHLIGHT */
+.contact-email-box {
+  margin-top: 35px;
+  padding: 20px 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.contact-email-box:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.contact-email-box a {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-email-box span {
+  color: #bfdbfe !important;
+}
+
+/* SUPPORT */
+.contact-support {
+  margin-top: 32px;
+}
+
+.contact-support > span {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.contact-support p {
+  color: #dbeafe !important;
+  line-height: 1.7;
+}
+
+.contact-support small {
+  color: #93c5fd !important;
+}
+
+/* MOBILE */
+@media (max-width: 850px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .contact-info {
+    min-height: auto;
+    padding: 38px 28px;
+  }
+
+  .contact-form-card {
+    min-height: auto;
+    padding: 30px 25px;
+  }
+}
+
+/* =========================================================
+   CONTACT SECTION — FINAL SIZE + TEXT FIX
+   ========================================================= */
+
+.contact-wrapper {
+  padding: 100px 7%;
+  background: #f8fafc;
+}
+
+.contact-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  align-items: stretch;
+}
+
+/* =========================
+   LEFT CONTACT BOX
+   ========================= */
+
+.contact-info {
+  min-height: 620px;
+  padding: 55px;
+  border-radius: 28px;
+  background: linear-gradient(
+    145deg,
+    #172554 0%,
+    #1e3a8a 55%,
+    #312e81 100%
+  );
+  color: #ffffff;
+  box-shadow: 0 25px 60px rgba(30, 58, 138, 0.18);
+}
+
+.contact-info .section-label {
+  color: #bfdbfe;
+}
+
+.contact-info h2 {
+  margin-top: 18px;
+  color: #ffffff !important;
+  font-size: clamp(42px, 5vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.contact-description {
+  margin-top: 24px;
+  max-width: 520px;
+  color: #dbeafe !important;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* =========================
+   EMAIL HIGHLIGHT
+   ========================= */
+
+.contact-email-box {
+  margin-top: 38px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.contact-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #2563eb;
+}
+
+.contact-email-box span {
+  display: block;
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.contact-email-box a {
+  display: inline-block;
+  margin-top: 5px;
+  color: #ffffff !important;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-email-box a:hover {
+  color: #bfdbfe !important;
+}
+
+/* =========================
+   SUPPORT
+   ========================= */
+
+.contact-support {
+  margin-top: 42px;
+}
+
+.contact-support > span {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-support p {
+  margin-top: 10px;
+  max-width: 520px;
+  color: #dbeafe !important;
+  line-height: 1.7;
+}
+
+.contact-support small {
+  display: block;
+  margin-top: 12px;
+  color: #93c5fd !important;
+}
+
+
+/* =========================================================
+   RIGHT — LET'S TALK
+   ========================================================= */
+
+.contact-form-card {
+  min-height: 560px;
+  padding: 40px;
+  align-self: center;
+  border-radius: 26px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.contact-form-header span {
+  display: block;
+  color: #0f172a !important;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.contact-form-header p {
+  margin-top: 7px;
+  color: #64748b !important;
+  font-size: 14px;
+}
+
+/* FORM */
+
+.contact-form-card form {
+  margin-top: 28px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #334155 !important;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #0f172a !important;
+  font-family: inherit;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.contact-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.contact-submit:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(37, 99, 235, 0.2);
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
+
+.contact-success {
+  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #2563eb;
+}
+
+.contact-success h3 {
+  margin-top: 15px;
+  color: #0f172a !important;
+}
+
+.contact-success p {
+  margin-top: 6px;
+  color: #64748b !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .contact-info {
+    min-height: auto;
+    padding: 40px;
+  }
+
+  .contact-form-card {
+    min-height: auto;
+    padding: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-wrapper {
+    padding: 70px 6%;
+  }
+
+  .contact-info {
+    padding: 30px 24px;
+    border-radius: 22px;
+  }
+
+  .contact-info h2 {
+    font-size: 42px;
+  }
+
+  .contact-email-box {
+    padding: 16px;
+  }
+
+  .contact-form-card {
+    padding: 25px 20px;
+    border-radius: 22px;
+  }
+
+  .contact-form-header span {
+    font-size: 25px;
+  }
+}
+
+/* =====================================================
+   CONTACT — OVERRIDE EVERYTHING
+   ===================================================== */
+
+/* LEFT SIDE */
+.home-page .contact-wrapper .contact-section .contact-info {
+  min-height: 650px !important;
+  height: 650px !important;
+  padding: 60px !important;
+  background: linear-gradient(135deg, #172554, #1e3a8a) !important;
+  border-radius: 30px !important;
+  box-sizing: border-box !important;
+}
+
+/* START A CONVERSATION — FORCE WHITE */
+.home-page .contact-wrapper .contact-info h2 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  font-size: 54px !important;
+  line-height: 1.05 !important;
+}
+
+/* DESCRIPTION */
+.home-page .contact-wrapper .contact-info .contact-description {
+  color: #dbeafe !important;
+}
+
+/* EMAIL */
+.home-page .contact-wrapper .contact-info .contact-email-box {
+  background: rgba(255,255,255,0.12) !important;
+}
+
+/* =====================================================
+   RIGHT SIDE — DEFINITELY SMALLER
+   ===================================================== */
+
+.home-page .contact-wrapper .contact-section .contact-form-card {
+  min-height: 500px !important;
+  height: 500px !important;
+  padding: 35px !important;
+  align-self: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Keep form inside smaller card */
+.home-page .contact-wrapper .contact-form-card form {
+  margin-top: 22px !important;
+}
+
+.home-page .contact-wrapper .contact-form-card textarea {
+  height: 110px !important;
+  resize: none;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .home-page .contact-wrapper .contact-section {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-page .contact-wrapper .contact-info {
+    height: auto !important;
+    min-height: 560px !important;
+  }
+
+  .home-page .contact-wrapper .contact-form-card {
+    height: auto !important;
+    min-height: 500px !important;
+  }
+
+}
+
+/* =====================================================
+   CONTACT — FINAL FORM FIT FIX
+   ===================================================== */
+
+.home-page .contact-wrapper .contact-section {
+  align-items: stretch !important;
+}
+
+/* LEFT SIDE */
+.home-page .contact-wrapper .contact-info {
+  min-height: 650px !important;
+  height: 650px !important;
+  box-sizing: border-box !important;
+}
+
+/* RIGHT SIDE */
+.home-page .contact-wrapper .contact-form-card {
+  height: auto !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+  padding: 32px !important;
+  align-self: center !important;
+}
+
+/* Form spacing */
+.home-page .contact-wrapper .contact-form-card form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  margin-top: 18px !important;
+}
+
+/* Groups */
+.home-page .contact-wrapper .contact-form-card .form-group {
+  margin: 0 !important;
+}
+
+/* Message textarea */
+.home-page .contact-wrapper .contact-form-card textarea {
+  height: 90px !important;
+  min-height: 90px !important;
+  max-height: 90px !important;
+  resize: none !important;
+}
+
+/* Inputs */
+.home-page .contact-wrapper .contact-form-card input {
+  height: 42px !important;
+  box-sizing: border-box !important;
+}
+
+/* Send button */
+.home-page .contact-wrapper .contact-form-card .contact-submit {
+  height: 46px !important;
+  min-height: 46px !important;
+  margin-top: 4px !important;
+  box-sizing: border-box !important;
+}
+
+/* Heading inside right card */
+.home-page .contact-wrapper .contact-form-card .contact-form-header {
+  margin-bottom: 0 !important;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .home-page .contact-wrapper .contact-info {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .home-page .contact-wrapper .contact-form-card {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+}
+
+/* =====================================================
+   TESTIMONIALS — PREMIUM HIGHLIGHT + ANIMATION
+   ===================================================== */
+
+.testimonials-section {
+  position: relative;
+  padding: 110px 7%;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* Heading */
+.testimonials-section .section-label {
+  color: #2563eb;
+}
+
+.testimonials-section h2 {
+  color: #0f172a;
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+/* Cards container */
+.testimonials-grid {
+  margin-top: 55px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* Individual cards */
+.testimonial-card {
+  position: relative;
+  padding: 34px;
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+/* Subtle moving glow */
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  top: -90px;
+  right: -70px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.08);
+  transition: transform 0.5s ease;
+}
+
+/* Hover */
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  background: #ffffff;
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.10);
+}
+
+.testimonial-card:hover::before {
+  transform: scale(2.2);
+}
+
+/* Quote */
+.testimonial-card blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 25px 0;
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* Stars */
+.testimonial-stars {
+  display: flex;
+  gap: 4px;
+  color: #f59e0b;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+/* Person */
+.testimonial-author {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+/* Initial circle */
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  font-weight: 800;
+
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.20);
+
+  transition: transform 0.35s ease;
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  transform: rotate(-5deg) scale(1.08);
+}
+
+/* Name */
+.testimonial-author h3 {
+  margin: 0;
+  color: #0f172a !important;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* Role */
+.testimonial-author p {
+  margin: 3px 0 0;
+  color: #94a3b8 !important;
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   SOFT FLOATING ANIMATION
+   ===================================================== */
+
+@keyframes testimonialFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.testimonial-card:nth-child(1) {
+  animation: testimonialFloat 6s ease-in-out infinite;
+}
+
+.testimonial-card:nth-child(2) {
+  animation: testimonialFloat 6s ease-in-out 1.2s infinite;
+}
+
+.testimonial-card:nth-child(3) {
+  animation: testimonialFloat 6s ease-in-out 2.4s infinite;
+}
+
+/* Pause movement when interacting */
+.testimonial-card:hover {
+  animation-play-state: paused;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 900px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card {
+    min-height: 290px;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonials-section {
+    padding: 80px 6%;
+  }
+
+  .testimonial-card {
+    padding: 27px;
+    min-height: 280px;
+  }
+
+  .testimonial-card blockquote {
+    font-size: 14px;
+  }
+}
+
+/* =====================================================
+   TESTIMONIALS — CLEAN PREMIUM ANIMATION
+   NO BUBBLES / NO CIRCLES / NO OVALS
+   ===================================================== */
+
+.testimonial-card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Clean shine sweep */
+.testimonial-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.65) 50%,
+    transparent 80%
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+/* Hover */
+.testimonial-card:hover {
+  transform: translateY(-12px) scale(1.015);
+  border-color: rgba(37, 99, 235, 0.28);
+  box-shadow:
+    0 20px 45px rgba(15, 23, 42, 0.10),
+    0 0 0 1px rgba(37, 99, 235, 0.04);
+}
+
+/* Shine moves across card */
+.testimonial-card:hover::after {
+  left: 140%;
+}
+
+
+/* =====================================================
+   TOP ACCENT LINE
+   ===================================================== */
+
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #4f46e5
+  );
+  transition: width 0.5s ease;
+}
+
+.testimonial-card:hover::before {
+  width: 100%;
+}
+
+
+/* =====================================================
+   STARS — SUBTLE ANIMATION
+   ===================================================== */
+
+.testimonial-stars {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+}
+
+.testimonial-stars span {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.testimonial-card:hover .testimonial-stars span:nth-child(1) {
+  transform: translateY(-3px);
+}
+
+.testimonial-card:hover .testimonial-stars span:nth-child(2) {
+  transform: translateY(-5px);
+}
+
+.testimonial-card:hover .testimonial-stars span:nth-child(3) {
+  transform: translateY(-6px);
+}
+
+.testimonial-card:hover .testimonial-stars span:nth-child(4) {
+  transform: translateY(-5px);
+}
+
+.testimonial-card:hover .testimonial-stars span:nth-child(5) {
+  transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   QUOTE ANIMATION
+   ===================================================== */
+
+.testimonial-card blockquote {
+  position: relative;
+  z-index: 2;
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease;
+}
+
+.testimonial-card:hover blockquote {
+  transform: translateX(4px);
+  color: #334155;
+}
+
+
+/* =====================================================
+   AUTHOR ANIMATION
+   ===================================================== */
+
+.testimonial-author {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s ease;
+}
+
+.testimonial-card:hover .testimonial-author {
+  transform: translateX(4px);
+}
+
+
+/* =====================================================
+   AVATAR — NO BUBBLE, JUST CLEAN SQUARE
+   ===================================================== */
+
+.testimonial-avatar {
+  border-radius: 12px !important;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  transform: translateY(-2px) rotate(-3deg);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+
+/* =====================================================
+   MOBILE — KEEP IT SMOOTH
+   ===================================================== */
+
+@media (max-width: 600px) {
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .testimonial-card::after {
+    display: none;
+  }
+}
+/* =====================================================
+   PRICING — PREMIUM SHINE ANIMATION
+   NO BUBBLES / NO OVALS
+   ===================================================== */
+
+.pricing-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Shine sweep */
+.pricing-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.7) 50%,
+    transparent 80%
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pricing-card:hover {
+  transform: translateY(-12px) scale(1.015);
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+.pricing-card:hover::after {
+  left: 140%;
+}
+
+/* Top accent line */
+.pricing-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #4f46e5
+  );
+  transition: width 0.5s ease;
+  z-index: 6;
+}
+
+.pricing-card:hover::before {
+  width: 100%;
+}
+
+/* Button stays above animation */
+.pricing-button {
+  position: relative;
+  z-index: 10;
+}
+/* =====================================================
+   TESTIMONIALS — DIFFERENT ANIMATION
+   NO BUBBLES / NO CIRCLES / NO OVALS
+   ===================================================== */
+
+.testimonial-card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+/* Moving border accent */
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #2563eb,
+    transparent
+  );
+  transition: left 0.65s ease;
+}
+
+.testimonial-card:hover::before {
+  left: 100%;
+}
+
+/* Card hover */
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  border-color: #cbd5e1;
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.10);
+}
+
+/* Quote moves slightly */
+.testimonial-card blockquote {
+  transition:
+    transform 0.4s ease,
+    color 0.4s ease;
+}
+
+.testimonial-card:hover blockquote {
+  transform: translateY(-3px);
+  color: #334155;
+}
+
+/* Author slides subtly */
+.testimonial-author {
+  transition: transform 0.4s ease;
+}
+
+.testimonial-card:hover .testimonial-author {
+  transform: translateX(6px);
+}
+
+/* Stars become brighter */
+.testimonial-stars {
+  transition:
+    transform 0.35s ease,
+    letter-spacing 0.35s ease;
+}
+
+.testimonial-card:hover .testimonial-stars {
+  transform: translateY(-2px);
+  letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .pricing-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+  }
+
+}
+/* =========================================================
+   PRICING — PREMIUM SHINE HOVER
+   NO BUBBLES / NO OVALS
+   ========================================================= */
+
+.pricing-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shine layer */
+.pricing-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Shine moves across card */
+.pricing-card:hover::after {
+  left: 130%;
+}
+
+/* Keep card content above shine */
+.pricing-card > * {
+  position: relative;
+  z-index: 6;
+}
+
+/* Slight premium lift */
+.pricing-card {
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.13);
+}
+
+/* Popular card */
+.pricing-card.popular:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 30px 65px rgba(37, 99, 235, 0.16);
+}
+
+
+/* =========================================================
+   REMOVE PRICING BUBBLES / OVALS
+   ========================================================= */
+
+.pricing-section::before,
+.pricing-section::after,
+.pricing-container::before,
+.pricing-container::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =========================================================
+   GET STARTED BUTTON
+   ========================================================= */
+
+.pricing-button {
+  position: relative;
+  z-index: 10;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.pricing-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.22);
+}
+
+.pricing-button svg {
+  transition: transform 0.3s ease;
+}
+
+.pricing-button:hover svg {
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .pricing-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .pricing-card.popular:hover {
+    transform: translateY(-7px);
+  }
+
+  .pricing-card::after {
+    display: none;
+  }
+}
+
+/* =====================================================
+   CONTACT INFO — MATCH HOME ABOUT STYLE
+   ===================================================== */
+
+.contact-info {
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 28px;
+  padding: 48px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+}
+
+.contact-info .section-label {
+  color: #38bdf8;
+}
+
+.contact-info h2 {
+  color: #ffffff;
+}
+
+.contact-info .contact-description {
+  color: #cbd5e1;
+}
+
+/* Email highlight */
+.contact-email-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.contact-email-box span {
+  color: #94a3b8;
+}
+
+.contact-email-box a {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.contact-support {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-support > span {
+  color: #ffffff;
+}
+
+.contact-support p {
+  color: #cbd5e1;
+}
+
+.contact-support small {
+  color: #94a3b8;
+}
+
+/* =====================================================
+   CONTACT LEFT BOX — FORCE DARK STYLE
+   ===================================================== */
+
+.contact-section .contact-info {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border-radius: 28px !important;
+  padding: 48px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16) !important;
+}
+
+/* Heading */
+.contact-section .contact-info h2 {
+  color: #ffffff !important;
+}
+
+/* Description */
+.contact-section .contact-info .contact-description {
+  color: #cbd5e1 !important;
+}
+
+/* Section label */
+.contact-section .contact-info .section-label {
+  color: #38bdf8 !important;
+}
+
+/* Email box */
+.contact-section .contact-email-box {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 18px !important;
+}
+
+/* Email text */
+.contact-section .contact-email-box span {
+  color: #94a3b8 !important;
+}
+
+.contact-section .contact-email-box a {
+  color: #38bdf8 !important;
+  font-weight: 700 !important;
+}
+
+/* Support */
+.contact-section .contact-support {
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.contact-section .contact-support > span {
+  color: #ffffff !important;
+}
+
+.contact-section .contact-support p {
+  color: #cbd5e1 !important;
+}
+
+.contact-section .contact-support small {
+  color: #94a3b8 !important;
+}
+
+/* =====================================================
+   CONTACT — TEXT + EMAIL HIGHLIGHT
+   ===================================================== */
+
+.contact-section .contact-info h2 {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-section .contact-description {
+  color: #475569 !important;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* EMAIL BOX */
+.contact-section .contact-email-box {
+  margin-top: 32px !important;
+  padding: 20px 22px !important;
+
+  background: #eef6ff !important;
+  border: 1px solid #bfdbfe !important;
+  border-radius: 18px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08) !important;
+
+  transition: all 0.3s ease !important;
+}
+
+/* EMAIL BOX HOVER */
+.contact-section .contact-email-box:hover {
+  transform: translateY(-3px);
+  background: #e0efff !important;
+  border-color: #93c5fd !important;
+  box-shadow: 0 16px 35px rgba(37, 99, 235, 0.14) !important;
+}
+
+/* EMAIL ICON */
+.contact-section .contact-icon {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border-radius: 13px !important;
+  background: #2563eb !important;
+  color: white !important;
+
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22) !important;
+}
+
+/* EMAIL LABEL */
+.contact-section .contact-email-box span {
+  display: block;
+  color: #64748b !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+/* EMAIL ADDRESS */
+.contact-section .contact-email-box a {
+  display: inline-block;
+  color: #1d4ed8 !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+}
+
+.contact-section .contact-email-box a:hover {
+  color: #1e40af !important;
+}
+
+/* SUPPORT TEXT */
+.contact-section .contact-support > span {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.contact-section .contact-support p {
+  color: #64748b !important;
+}
+
+.contact-section .contact-support small {
+  color: #94a3b8 !important;
+}
+/* =====================================================
+   CONTACT LEFT SIDE — LOGIN STYLE
+   ===================================================== */
+
+.contact-section .contact-info {
+  background: linear-gradient(
+    145deg,
+    #0f172a 0%,
+    #111c35 55%,
+    #172554 100%
+  ) !important;
+
+  color: #ffffff !important;
+  border-radius: 28px !important;
+  padding: 48px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18) !important;
+}
+
+/* CONTACT HEADING */
+.contact-section .contact-info h2 {
+  color: #ffffff !important;
+}
+
+/* DESCRIPTION */
+.contact-section .contact-description {
+  color: #cbd5e1 !important;
+}
+
+/* CONTACT LABEL */
+.contact-section .contact-info .section-label {
+  color: #60a5fa !important;
+}
+
+/* =====================================================
+   EMAIL — SEPARATE HIGHLIGHT
+   ===================================================== */
+
+.contact-section .contact-email-box {
+  margin-top: 30px !important;
+  padding: 20px !important;
+
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1px solid rgba(96, 165, 250, 0.28) !important;
+  border-radius: 18px !important;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+
+  transition: 0.35s ease !important;
+}
+
+.contact-section .contact-email-box:hover {
+  transform: translateY(-3px);
+  border-color: rgba(96, 165, 250, 0.55) !important;
+  background: rgba(255, 255, 255, 0.13) !important;
+}
+
+/* EMAIL ICON */
+.contact-section .contact-icon {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* EMAIL LABEL */
+.contact-section .contact-email-box span {
+  color: #94a3b8 !important;
+}
+
+/* EMAIL */
+.contact-section .contact-email-box a {
+  color: #60a5fa !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+}
+
+/* =====================================================
+   SUPPORT
+   ===================================================== */
+
+.contact-section .contact-support {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.contact-section .contact-support > span {
+  color: #ffffff !important;
+}
+
+.contact-section .contact-support p {
+  color: #cbd5e1 !important;
+}
+
+.contact-section .contact-support small {
+  color: #94a3b8 !important;
+}
+/* =====================================================
+   CONTACT LEFT PANEL — FORCE DARK LOGIN STYLE
+   ===================================================== */
+
+.contact-section {
+  background: transparent !important;
+}
+
+/* LEFT SIDE */
+.contact-section .contact-info {
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #111827 45%,
+    #172554 100%
+  ) !important;
+
+  color: white !important;
+
+  padding: 55px !important;
+  border-radius: 28px !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.22) !important;
+
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* IMPORTANT:
+   Force every text inside LEFT SIDE to white/light */
+.contact-section .contact-info h2 {
+  color: #ffffff !important;
+}
+
+.contact-section .contact-info p {
+  color: #cbd5e1 !important;
+}
+
+.contact-section .contact-info span {
+  color: #e2e8f0 !important;
+}
+
+.contact-section .contact-info .section-label {
+  color: #60a5fa !important;
+}
+
+/* =====================================================
+   EMAIL BOX — SEPARATE HIGHLIGHT
+   ===================================================== */
+
+.contact-section .contact-email-box {
+  background: rgba(37, 99, 235, 0.16) !important;
+
+  border: 1px solid rgba(96, 165, 250, 0.35) !important;
+
+  border-radius: 18px !important;
+
+  padding: 20px !important;
+
+  margin-top: 32px !important;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+
+  position: relative !important;
+  z-index: 2 !important;
+
+  transition: all 0.3s ease !important;
+}
+
+.contact-section .contact-email-box:hover {
+  transform: translateY(-3px) !important;
+  background: rgba(37, 99, 235, 0.24) !important;
+  border-color: rgba(96, 165, 250, 0.65) !important;
+}
+
+/* Email icon */
+.contact-section .contact-icon {
+  background: #2563eb !important;
+  color: white !important;
+}
+
+/* Email text */
+.contact-section .contact-email-box span {
+  color: #94a3b8 !important;
+}
+
+.contact-section .contact-email-box a {
+  color: #60a5fa !important;
+  font-weight: 800 !important;
+}
+
+/* =====================================================
+   SUPPORT TEXT
+   ===================================================== */
+
+.contact-section .contact-support {
+  color: white !important;
+}
+
+.contact-section .contact-support span {
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+.contact-section .contact-support p {
+  color: #cbd5e1 !important;
+}
+
+.contact-section .contact-support small {
+  color: #94a3b8 !important;
+}
+
+/* =========================================================
+   CONTACT SECTION — FINAL CLEAN DESIGN
+   ========================================================= */
+
+.contact-section {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: stretch;
+  padding: 110px 7%;
+  background: #f8fafc;
+}
+
+/* ---------- LEFT CONTACT PANEL ---------- */
+
+.contact-info {
+  background: linear-gradient(
+    145deg,
+    #0f172a 0%,
+    #111827 55%,
+    #1e293b 100%
+  ) !important;
+
+  padding: 55px !important;
+  border-radius: 28px !important;
+
+  color: #ffffff !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  box-shadow: 0 20px 55px rgba(15,23,42,0.18) !important;
+
+  min-height: 560px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* heading */
+
+.contact-info h2 {
+  color: #ffffff !important;
+  font-size: clamp(38px, 4vw, 58px) !important;
+  line-height: 1.05 !important;
+  margin-top: 18px !important;
+}
+
+/* description */
+
+.contact-info .contact-description {
+  color: #cbd5e1 !important;
+  font-size: 17px !important;
+  line-height: 1.7 !important;
+  margin-top: 20px !important;
+}
+
+/* label */
+
+.contact-info .section-label {
+  color: #93c5fd !important;
+}
+
+/* ---------- EMAIL BOX ---------- */
+
+.contact-email-box {
+  margin-top: 35px !important;
+
+  padding: 20px 22px !important;
+
+  background: rgba(255,255,255,0.07) !important;
+
+  border: 1px solid rgba(255,255,255,0.12) !important;
+
+  border-radius: 18px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease !important;
+}
+
+.contact-email-box:hover {
+  transform: translateY(-3px) !important;
+  background: rgba(255,255,255,0.11) !important;
+  border-color: rgba(255,255,255,0.2) !important;
+}
+
+/* email icon */
+
+.contact-email-box .contact-icon {
+  width: 44px !important;
+  height: 44px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border-radius: 12px !important;
+
+  background: rgba(255,255,255,0.12) !important;
+
+  color: #ffffff !important;
+
+  flex-shrink: 0 !important;
+}
+
+/* "Email us" */
+
+.contact-email-box span {
+  display: block !important;
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+  margin-bottom: 4px !important;
+}
+
+/* EMAIL — WHITE, NOT BLUE */
+
+.contact-email-box a {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+.contact-email-box a:hover {
+  color: #dbeafe !important;
+}
+
+/* ---------- SUPPORT ---------- */
+
+.contact-support {
+  margin-top: auto !important;
+  padding-top: 35px !important;
+}
+
+.contact-support > span {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+}
+
+.contact-support p {
+  color: #cbd5e1 !important;
+  line-height: 1.7 !important;
+  margin-top: 10px !important;
+}
+
+.contact-support small {
+  display: block !important;
+  color: #94a3b8 !important;
+  margin-top: 12px !important;
+}
+
+
+/* =========================================================
+   RIGHT — LET'S TALK
+   ========================================================= */
+
+.contact-form-card {
+  background: #ffffff !important;
+
+  border-radius: 24px !important;
+
+  padding: 38px !important;
+
+  min-height: 490px !important;
+
+  border: 1px solid #e2e8f0 !important;
+
+  box-shadow: 0 15px 40px rgba(15,23,42,0.07) !important;
+
+  align-self: center !important;
+}
+
+/* header */
+
+.contact-form-header span {
+  color: #0f172a !important;
+  font-size: 28px !important;
+  font-weight: 800 !important;
+}
+
+.contact-form-header p {
+  color: #64748b !important;
+  margin-top: 6px !important;
+}
+
+/* inputs */
+
+.contact-form-card input,
+.contact-form-card textarea {
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  background: #f8fafc !important;
+
+  border: 1px solid #e2e8f0 !important;
+
+  border-radius: 11px !important;
+
+  padding: 12px 14px !important;
+
+  color: #0f172a !important;
+
+  outline: none !important;
+}
+
+.contact-form-card input:focus,
+.contact-form-card textarea:focus {
+  border-color: #94a3b8 !important;
+  box-shadow: 0 0 0 3px rgba(148,163,184,0.12) !important;
+}
+
+/* labels */
+
+.contact-form-card label {
+  color: #334155 !important;
+}
+
+/* send button */
+
+.contact-submit {
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  background: #0f172a !important;
+  color: #ffffff !important;
+
+  border: none !important;
+  border-radius: 12px !important;
+
+  padding: 14px 20px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+
+  cursor: pointer !important;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease !important;
+}
+
+.contact-submit:hover {
+  background: #1e293b !important;
+  transform: translateY(-2px) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .contact-section {
+    grid-template-columns: 1fr;
+    padding: 75px 6%;
+  }
+
+  .contact-info {
+    min-height: auto;
+    padding: 35px !important;
+  }
+
+  .contact-form-card {
+    min-height: auto !important;
+    padding: 30px !important;
+  }
+
+  .contact-support {
+    margin-top: 35px !important;
+  }
+}
+
+/* =========================================================
+   CONTACT LEFT SIDE — FINAL DESIGN
+   ========================================================= */
+
+.contact-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 70px;
+  align-items: stretch;
+}
+
+/* LEFT CONTACT PANEL */
+.contact-info {
+  position: relative;
+  padding: 58px 52px;
+  border-radius: 28px;
+
+  /* LOGIN/SIGNUP STYLE DARK BACKGROUND */
+  background:
+    radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.16), transparent 35%),
+    linear-gradient(145deg, #111827 0%, #172033 55%, #0f172a 100%) !important;
+
+  color: #ffffff !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.16);
+
+  overflow: hidden;
+}
+
+/* subtle light effect — NOT a bubble */
+.contact-info::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: -90px;
+  right: -90px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* CONTACT LABEL */
+.contact-info .section-label {
+  color: #a5b4fc !important;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* MAIN HEADING */
+.contact-info h2 {
+  color: #ffffff !important;
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-top: 18px;
+}
+
+/* DESCRIPTION */
+.contact-description {
+  color: #cbd5e1 !important;
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-top: 22px;
+}
+
+/* =========================================================
+   EMAIL — SEPARATE HIGHLIGHT
+   ========================================================= */
+
+.contact-email-box {
+  margin-top: 38px;
+  padding: 18px 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  border-radius: 16px;
+
+  /* NOT BLUE */
+  background: rgba(255, 255, 255, 0.08) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.contact-email-box:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* EMAIL ICON */
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  /* WARM WHITE/GOLD — NOT BLUE */
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+/* Email label */
+.contact-email-box span {
+  display: block;
+  color: #94a3b8 !important;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+/* EMAIL ADDRESS */
+.contact-email-box a {
+  color: #f8fafc !important;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.contact-email-box a:hover {
+  color: #c4b5fd !important;
+}
+
+/* =========================================================
+   SUPPORT
+   ========================================================= */
+
+.contact-support {
+  margin-top: 38px;
+  padding-top: 28px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.contact-support > span {
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.contact-support p {
+  color: #cbd5e1 !important;
+  line-height: 1.7;
+  margin-top: 9px;
+}
+
+.contact-support small {
+  display: block;
+  color: #94a3b8 !important;
+  margin-top: 12px;
+}
+
+
+/* =========================================================
+   RIGHT "LET'S TALK" — KEEP WHITE + SLIGHTLY SMALLER
+   ========================================================= */
+
+.contact-form-card {
+  position: relative;
+  padding: 38px !important;
+  border-radius: 24px;
+  background: #ffffff !important;
+
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+
+  min-height: 0 !important;
+  height: fit-content;
+  align-self: center;
+}
+
+.contact-form-header span {
+  color: #0f172a !important;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.contact-form-header p {
+  color: #64748b !important;
+  margin-top: 6px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .contact-info {
+    padding: 42px 30px;
+  }
+
+  .contact-form-card {
+    padding: 30px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-info {
+    padding: 35px 24px;
+    border-radius: 22px;
+  }
+
+  .contact-info h2 {
+    font-size: 38px;
+  }
+
+  .contact-email-box {
+    padding: 15px;
+  }
+
+  .contact-form-card {
+    padding: 24px !important;
+    border-radius: 20px;
+  }
+}
+
+/* =========================================================
+   CONTACT — FINAL OVERRIDE
+   ========================================================= */
+
+/* LEFT SIDE BACKGROUND */
+.home-page .contact-section .contact-info {
+  background: linear-gradient(
+    145deg,
+    #111827 0%,
+    #1e293b 55%,
+    #172033 100%
+  ) !important;
+
+  color: #f8fafc !important;
+}
+
+/* REMOVE ALL OLD BUBBLES / SHAPES */
+.home-page .contact-section .contact-info::before,
+.home-page .contact-section .contact-info::after {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* REMOVE POSSIBLE SECTION SHAPES TOO */
+.home-page .contact-section::before,
+.home-page .contact-section::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* HEADING */
+.home-page .contact-section .contact-info h2 {
+  color: #ffffff !important;
+}
+
+/* DESCRIPTION */
+.home-page .contact-section .contact-description {
+  color: #cbd5e1 !important;
+}
+
+/* EMAIL BOX */
+.home-page .contact-section .contact-email-box {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+/* EMAIL LABEL */
+.home-page .contact-section .contact-email-box span {
+  color: #94a3b8 !important;
+}
+
+/* EMAIL ADDRESS — NOT BLUE */
+.home-page .contact-section .contact-email-box a,
+.home-page .contact-section .contact-email-box a:visited {
+  color: #f8fafc !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+/* EMAIL HOVER */
+.home-page .contact-section .contact-email-box a:hover {
+  color: #c4b5fd !important;
+}
+
+/* EMAIL ICON */
+.home-page .contact-section .contact-icon {
+  background: #f8fafc !important;
+  color: #334155 !important;
+}
+
+/* SUPPORT */
+.home-page .contact-section .contact-support {
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.home-page .contact-section .contact-support > span {
+  color: #ffffff !important;
+}
+
+.home-page .contact-section .contact-support p {
+  color: #cbd5e1 !important;
+}
+
+.home-page .contact-section .contact-support small {
+  color: #94a3b8 !important;
+}

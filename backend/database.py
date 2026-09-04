@@ -1,4 +1,5 @@
 import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from urllib.parse import quote_plus
@@ -18,10 +19,20 @@ DATABASE_URL = (
 )
 
 
+# Aiven MySQL requires SSL
+connect_args = {
+    "ssl": {
+        "ssl_verify_cert": False,
+        "ssl_verify_identity": False,
+    }
+}
+
+
 engine = create_engine(
     DATABASE_URL,
     echo=True,
     pool_pre_ping=True,
+    connect_args=connect_args,
 )
 
 

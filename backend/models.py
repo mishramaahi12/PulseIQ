@@ -33,21 +33,22 @@ class User(Base):
         String(255),
         nullable=False
     )
-    created_at = Column(
-    DateTime,
-    default=datetime.utcnow,
-    nullable=False
-)
 
-last_login = Column(
-    DateTime,
-    nullable=True
-)
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    last_login = Column(
+        DateTime,
+        nullable=True
+    )
+
 
 # =========================================================
 # ACTIVITY LOG
 # =========================================================
-
 class ActivityLog(Base):
     __tablename__ = "activity_logs"
 

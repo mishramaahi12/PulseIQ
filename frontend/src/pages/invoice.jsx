@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useNavigate } from "react-router-dom";
+
 
 import {
   FileText,
@@ -192,6 +194,7 @@ function Invoice() {
   const [businessProfile, setBusinessProfile] = useState({});
   const [customers, setCustomers] = useState([]);
   const [invoices, setInvoices] = useState([]);
+  const navigate = useNavigate();
 
   const [customerName, setCustomerName] = useState("");
   const [customerCompany, setCustomerCompany] = useState("");
@@ -2246,12 +2249,9 @@ function Invoice() {
 
                 <button
                   type="button"
-                  onClick={() => {
-                    window.location.href =
-                      "/settings";
-                  }}
+                    onClick={() => navigate("/settings")}
                 >
-                  Go to Settings
+                     Go to Settings
                 </button>
               </div>
             )}

@@ -8,15 +8,19 @@ import {
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import PublicPages from "./pages/publicpages";
 
 import DashboardLayout from "./components/dashboard/dashboardlayout";
 
 import Analytics from "./pages/Analytics";
 import Customers from "./pages/customers";
 import UploadData from "./pages/uploaddata";
+import Invoice from "./pages/invoice";
 import Settings from "./pages/Settings";
-
 import PrismAI from "./components/dashboard/prismai";
+import Reports from "./pages/Reports";
+import Expenses from "./pages/expenses";
+
 
 function ProtectedRoute({ children }) {
   const loggedIn =
@@ -29,6 +33,7 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -40,7 +45,37 @@ function App() {
           element={<Home />}
         />
 
+
+        {/* PUBLIC WEBSITE PAGES */}
+
+        <Route
+          path="/features"
+          element={<PublicPages />}
+        />
+
+        <Route
+          path="/about"
+          element={<PublicPages />}
+        />
+
+        <Route
+          path="/why"
+          element={<PublicPages />}
+        />
+
+        <Route
+          path="/pricing"
+          element={<PublicPages />}
+        />
+
+        <Route
+          path="/contact"
+          element={<PublicPages />}
+        />
+
+
         {/* AUTH */}
+
         <Route
           path="/login"
           element={<Login />}
@@ -51,7 +86,9 @@ function App() {
           element={<Signup />}
         />
 
+
         {/* DASHBOARD */}
+
         <Route
           path="/dashboard"
           element={
@@ -61,7 +98,9 @@ function App() {
           }
         />
 
+
         {/* ANALYTICS */}
+
         <Route
           path="/analytics"
           element={
@@ -71,7 +110,21 @@ function App() {
           }
         />
 
+
+        {/* REPORTS */}
+
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute>
+              <Reports />
+            </ProtectedRoute>
+          }
+        />
+
+
         {/* CUSTOMERS */}
+
         <Route
           path="/customers"
           element={
@@ -81,7 +134,9 @@ function App() {
           }
         />
 
+
         {/* UPLOAD DATA */}
+
         <Route
           path="/uploaddata"
           element={
@@ -91,7 +146,9 @@ function App() {
           }
         />
 
+
         {/* ALTERNATIVE UPLOAD URL */}
+
         <Route
           path="/upload"
           element={
@@ -101,7 +158,33 @@ function App() {
           }
         />
 
+
+        {/* INVOICE */}
+
+        <Route
+          path="/invoice"
+          element={
+            <ProtectedRoute>
+              <Invoice />
+            </ProtectedRoute>
+          }
+        />
+
+
+        {/* EXPENSES */}
+
+        <Route
+          path="/expenses"
+          element={
+            <ProtectedRoute>
+              <Expenses />
+            </ProtectedRoute>
+          }
+        />
+
+
         {/* PRISM AI */}
+
         <Route
           path="/prismai"
           element={
@@ -111,7 +194,9 @@ function App() {
           }
         />
 
+
         {/* SETTINGS */}
+
         <Route
           path="/settings"
           element={
@@ -121,7 +206,9 @@ function App() {
           }
         />
 
+
         {/* UNKNOWN URL */}
+
         <Route
           path="*"
           element={

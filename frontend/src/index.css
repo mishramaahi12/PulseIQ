@@ -2056,3 +2056,24 @@ p {
     padding: 27px 21px;
   }
 }
+
+/* =========================================================
+   PULSEIQ — FORCE DESKTOP VIEW ON SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 768px) {
+  html {
+    min-width: 1200px;
+  }
+
+  body {
+    min-width: 1200px;
+    width: 1200px;
+    overflow-x: auto;
+  }
+
+  #root {
+    min-width: 1200px;
+    width: 1200px;
+  }
+}

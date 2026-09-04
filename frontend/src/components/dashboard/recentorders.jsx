@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Package,
   CheckCircle,
@@ -6,7 +8,7 @@ import {
 } from "lucide-react";
 
 function RecentOrders() {
-  const orders = [
+  const [orders, setOrders] = useState([
     {
       id: "#2486",
       customer: "Rahul Sharma",
@@ -39,7 +41,64 @@ function RecentOrders() {
       icon: <Package size={17} />,
       type: "yellow",
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/dashboard")
+      .then((res) => res.json())
+      .then((data) => {
+        if (
+          data.recent_orders &&
+          Array.isArray(data.recent_orders) &&
+          data.recent_orders.length > 0
+        ) {
+          const iconList = [
+            <CheckCircle size={17} />,
+            <Clock size={17} />,
+            <Truck size={17} />,
+            <Package size={17} />,
+          ];
+
+          const typeList = [
+            "green",
+            "orange",
+            "blue",
+            "yellow",
+          ];
+
+          setOrders(
+            data.recent_orders.map((order, index) => ({
+              id:
+                order.id ||
+                order.order_id ||
+                `#${index + 1}`,
+
+              customer:
+                order.customer ||
+                order.customer_name ||
+                "Customer",
+
+              amount:
+                order.amount ||
+                order.revenue ||
+                order.total ||
+                "₹0",
+
+              status:
+                order.status ||
+                "Completed",
+
+              icon: iconList[index % iconList.length],
+
+              type: typeList[index % typeList.length],
+            }))
+          );
+        }
+      })
+      .catch(() => {
+        // Keep demo orders if backend is unavailable
+      });
+  }, []);
 
   return (
     <div className="recent-orders-card">

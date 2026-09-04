@@ -2,17 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Signup() {
-
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
-
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
 
@@ -24,6 +21,10 @@ function Signup() {
       /[A-Z]/.test(password) &&
       /[a-z]/.test(password) &&
       /[0-9]/.test(password);
+
+    /* =========================================================
+       VALIDATION
+    ========================================================= */
 
     if (!cleanName || !cleanEmail || !password) {
       setError("Please fill all fields.");
@@ -37,47 +38,130 @@ function Signup() {
       return;
     }
 
-    const existingUser =
-      JSON.parse(
-        localStorage.getItem("pulseiq_user")
+    /* =========================================================
+       SIGNUP
+    ========================================================= */
+
+    try {
+      const response = await fetch(
+        "http://10.45.196.65:8000/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: cleanName,
+            email: cleanEmail,
+            password: password,
+          }),
+        }
       );
 
-    if (
-      existingUser &&
-      existingUser.email === cleanEmail
-    ) {
+      let data = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      /* =======================================================
+         BACKEND ERROR
+      ======================================================= */
+
+      if (!response.ok) {
+        setError(
+          data.detail ||
+            data.message ||
+            "Unable to create account. Please try again."
+        );
+
+        return;
+      }
+
+      /* =======================================================
+         SAVE USER LOCALLY
+
+         Important:
+         Backend may return user without name.
+         So we always make sure the entered name is saved.
+      ======================================================= */
+
+      const savedUser = {
+        ...(data.user || {}),
+
+        name:
+          data.user?.name ||
+          cleanName,
+
+        email:
+          data.user?.email ||
+          cleanEmail,
+      };
+
+      localStorage.setItem(
+        "pulseiq_user",
+        JSON.stringify(savedUser)
+      );
+
+      /* =======================================================
+         LOGIN STATUS
+      ======================================================= */
+
+      localStorage.setItem(
+        "pulseiq_logged_in",
+        "true"
+      );
+
+      /* =======================================================
+         USER ID
+
+         Keep backend ID separately if available.
+      ======================================================= */
+
+      if (data.user?.id) {
+        localStorage.setItem(
+          "pulseiq_user_id",
+          String(data.user.id)
+        );
+      }
+
+      /* =======================================================
+         TELL TOPBAR THAT USER DATA CHANGED
+      ======================================================= */
+
+      window.dispatchEvent(
+        new Event("pulseiq-user-updated")
+      );
+
+      /* =======================================================
+         GO TO DASHBOARD
+      ======================================================= */
+
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Signup error:", err);
+
       setError(
-        "An account with this email already exists."
+        "Unable to connect to the server. Please make sure the backend is running."
       );
-      return;
     }
-
-    const user = {
-      name: cleanName,
-      email: cleanEmail,
-      password,
-    };
-
-    localStorage.setItem(
-      "pulseiq_user",
-      JSON.stringify(user)
-    );
-
-    localStorage.setItem(
-      "pulseiq_logged_in",
-      "true"
-    );
-
-    navigate("/dashboard");
-
   };
 
   return (
     <div className="auth-page">
 
+      {/* =====================================================
+          LEFT BRAND SIDE
+      ===================================================== */}
+
       <div className="auth-brand-side">
 
-        <Link to="/" className="auth-brand">
+        <Link
+          to="/"
+          className="auth-brand"
+        >
           Pulse<span>IQ</span>
         </Link>
 
@@ -131,14 +215,16 @@ function Signup() {
             </div>
 
           </div>
-
         </div>
 
         <div className="auth-side-footer">
           PulseIQ · Business intelligence for smarter decisions.
         </div>
-
       </div>
+
+      {/* =====================================================
+          RIGHT FORM SIDE
+      ===================================================== */}
 
       <div className="auth-form-side">
 
@@ -150,6 +236,10 @@ function Signup() {
           >
             Pulse<span>IQ</span>
           </Link>
+
+          {/* =================================================
+              HEADER
+          ================================================= */}
 
           <div className="auth-card-header">
 
@@ -167,10 +257,18 @@ function Signup() {
 
           </div>
 
+          {/* =================================================
+              FORM
+          ================================================= */}
+
           <form
             className="auth-form"
             onSubmit={handleSubmit}
           >
+
+            {/* =================================================
+                NAME
+            ================================================= */}
 
             <div className="auth-field">
 
@@ -181,14 +279,18 @@ function Signup() {
               <input
                 type="text"
                 value={name}
-                onChange={(e) =>
-                  setName(e.target.value)
+                onChange={(event) =>
+                  setName(event.target.value)
                 }
                 placeholder="Your name"
                 required
               />
 
             </div>
+
+            {/* =================================================
+                EMAIL
+            ================================================= */}
 
             <div className="auth-field">
 
@@ -199,14 +301,18 @@ function Signup() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
+                onChange={(event) =>
+                  setEmail(event.target.value)
                 }
                 placeholder="you@company.com"
                 required
               />
 
             </div>
+
+            {/* =================================================
+                PASSWORD
+            ================================================= */}
 
             <div className="auth-field">
 
@@ -217,8 +323,8 @@ function Signup() {
               <input
                 type="password"
                 value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
+                onChange={(event) =>
+                  setPassword(event.target.value)
                 }
                 placeholder="Create a password"
                 minLength={8}
@@ -231,11 +337,19 @@ function Signup() {
 
             </div>
 
+            {/* =================================================
+                ERROR
+            ================================================= */}
+
             {error && (
               <div className="auth-error">
                 {error}
               </div>
             )}
+
+            {/* =================================================
+                SUBMIT
+            ================================================= */}
 
             <button
               type="submit"
@@ -252,6 +366,10 @@ function Signup() {
 
           </form>
 
+          {/* =================================================
+              LOGIN DIVIDER
+          ================================================= */}
+
           <div className="auth-divider">
             <span>
               ALREADY HAVE AN ACCOUNT?
@@ -259,15 +377,15 @@ function Signup() {
           </div>
 
           <div className="auth-switch">
+
             <Link to="/login">
               Sign in to PulseIQ
             </Link>
+
           </div>
 
         </div>
-
       </div>
-
     </div>
   );
 }

@@ -13139,3 +13139,108 @@ body {
     top: calc(100% + 305px);
   }
 }
+
+/* ================================
+   REVENUE FORECAST
+================================ */
+
+.revenue-forecast-card {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 18px;
+  background: #11151c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.forecast-glow {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: -90px;
+  right: -60px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.16);
+  filter: blur(45px);
+  pointer-events: none;
+}
+
+.revenue-forecast-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.revenue-forecast-header h2 {
+  margin: 6px 0 4px;
+}
+
+.revenue-forecast-header p {
+  margin: 0;
+  opacity: 0.65;
+}
+
+.revenue-forecast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.14);
+}
+
+.revenue-forecast-value {
+  position: relative;
+  z-index: 1;
+  margin-top: 26px;
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1px;
+}
+
+.revenue-forecast-growth {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  color: #4ade80;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.forecast-progress {
+  position: relative;
+  z-index: 1;
+  height: 6px;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.forecast-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #8b5cf6;
+}
+
+.revenue-forecast-note {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.65;
+}
+
+.revenue-forecast-note strong {
+  color: #ffffff;
+  opacity: 1;
+}

@@ -1,0 +1,71 @@
+.scroll-reveal {
+  opacity: 0;
+  transition:
+    opacity var(--reveal-duration, 700ms) ease,
+    transform var(--reveal-duration, 700ms) cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+/* Default - Up */
+.scroll-reveal-up {
+  transform: translateY(55px);
+}
+
+/* Down */
+.scroll-reveal-down {
+  transform: translateY(-55px);
+}
+
+/* Left */
+.scroll-reveal-left {
+  transform: translateX(-60px);
+}
+
+/* Right */
+.scroll-reveal-right {
+  transform: translateX(60px);
+}
+
+/* Zoom */
+.scroll-reveal-zoom {
+  transform: scale(0.92);
+}
+
+/* Visible state */
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .scroll-reveal-up {
+    transform: translateY(35px);
+  }
+
+  .scroll-reveal-down {
+    transform: translateY(-35px);
+  }
+
+  .scroll-reveal-left {
+    transform: translateX(-35px);
+  }
+
+  .scroll-reveal-right {
+    transform: translateX(35px);
+  }
+
+  .scroll-reveal-zoom {
+    transform: scale(0.95);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

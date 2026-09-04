@@ -13,31 +13,41 @@ function Navbar() {
       <div className="navbar-inner">
 
         {/* LOGO */}
-        <Link to="/" className="navbar-logo" onClick={closeMenu}>
+        <Link
+          to="/"
+          className="navbar-logo"
+          onClick={closeMenu}
+        >
           Pulse<span>IQ</span>
         </Link>
 
         {/* NAV LINKS */}
-        <div className={`navbar-links ${menuOpen ? "mobile-open" : ""}`}>
-          <a href="/#features" onClick={closeMenu}>
+        <div
+          className={`navbar-links ${
+            menuOpen ? "mobile-open" : ""
+          }`}
+        >
+
+          <Link to="/features" onClick={closeMenu}>
             Features
-          </a>
+          </Link>
 
-          <a href="/#about" onClick={closeMenu}>
+          <Link to="/about" onClick={closeMenu}>
             About
-          </a>
+          </Link>
 
-          <a href="/#why" onClick={closeMenu}>
+          <Link to="/why" onClick={closeMenu}>
             Why PulseIQ
-          </a>
+          </Link>
 
-          <a href="/#pricing" onClick={closeMenu}>
+          <Link to="/pricing" onClick={closeMenu}>
             Pricing
-          </a>
+          </Link>
 
-          <a href="/#contact" onClick={closeMenu}>
+          <Link to="/contact" onClick={closeMenu}>
             Contact
-          </a>
+          </Link>
+
         </div>
 
         {/* ACTIONS */}
@@ -46,6 +56,7 @@ function Navbar() {
             menuOpen ? "mobile-actions-open" : ""
           }`}
         >
+
           <Link
             to="/login"
             className="navbar-login"
@@ -61,6 +72,7 @@ function Navbar() {
           >
             Get started
           </Link>
+
         </div>
 
         {/* MOBILE MENU BUTTON */}

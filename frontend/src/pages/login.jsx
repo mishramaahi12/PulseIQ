@@ -2,63 +2,176 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Login() {
-
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
-
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
 
-    const savedUser =
-      JSON.parse(
-        localStorage.getItem("pulseiq_user")
+    const cleanEmail = email.trim().toLowerCase();
+
+    if (!cleanEmail || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://10.45.196.65:8000/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: cleanEmail,
+            password: password,
+          }),
+        }
       );
 
-    if (!savedUser) {
+      let data = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      /* =====================================================
+         BACKEND ERROR
+      ===================================================== */
+
+      if (!response.ok) {
+        setError(
+          data.detail ||
+            data.message ||
+            "Incorrect email or password."
+        );
+
+        return;
+      }
+
+      /* =====================================================
+         VALIDATE USER
+      ===================================================== */
+
+      if (!data.user || !data.user.id) {
+        setError(
+          "Login succeeded, but the server did not return a valid user ID."
+        );
+
+        return;
+      }
+
+      /* =====================================================
+         GET PREVIOUSLY SAVED USER
+         
+         This is important because backend may return:
+         id + email
+         
+         but may not return name.
+      ===================================================== */
+
+      let previousUser = {};
+
+      try {
+        previousUser = JSON.parse(
+          localStorage.getItem("pulseiq_user") || "{}"
+        );
+      } catch {
+        previousUser = {};
+      }
+
+      /* =====================================================
+         BUILD FINAL USER
+      ===================================================== */
+
+      const finalUser = {
+        ...previousUser,
+        ...data.user,
+
+        name:
+          data.user?.name ||
+          previousUser?.name ||
+          data.user?.fullName ||
+          previousUser?.fullName ||
+          data.user?.username ||
+          previousUser?.username ||
+          cleanEmail.split("@")[0],
+
+        email:
+          data.user?.email ||
+          previousUser?.email ||
+          cleanEmail,
+      };
+
+      /* =====================================================
+         SAVE COMPLETE USER
+      ===================================================== */
+
+      localStorage.setItem(
+        "pulseiq_user",
+        JSON.stringify(finalUser)
+      );
+
+      /* =====================================================
+         SAVE USER ID
+      ===================================================== */
+
+      localStorage.setItem(
+        "pulseiq_user_id",
+        String(data.user.id)
+      );
+
+      /* =====================================================
+         LOGIN STATUS
+      ===================================================== */
+
+      localStorage.setItem(
+        "pulseiq_logged_in",
+        "true"
+      );
+
+      /* =====================================================
+         UPDATE TOPBAR IMMEDIATELY
+      ===================================================== */
+
+      window.dispatchEvent(
+        new Event("pulseiq-user-updated")
+      );
+
+      /* =====================================================
+         GO TO DASHBOARD
+      ===================================================== */
+
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Login error:", err);
+
       setError(
-        "No account found. Please create an account first."
+        "Unable to connect to the server. Please make sure the backend is running."
       );
-      return;
     }
-
-    const cleanEmail =
-      email.trim().toLowerCase();
-
-    if (
-      cleanEmail !== savedUser.email
-    ) {
-      setError("Incorrect email address.");
-      return;
-    }
-
-    if (
-      password !== savedUser.password
-    ) {
-      setError("Incorrect password.");
-      return;
-    }
-
-    localStorage.setItem(
-      "pulseiq_logged_in",
-      "true"
-    );
-
-    navigate("/dashboard");
-
   };
 
   return (
     <div className="auth-page">
 
+      {/* =====================================================
+          LEFT BRAND SIDE
+      ===================================================== */}
+
       <div className="auth-brand-side">
 
-        <Link to="/" className="auth-brand">
+        <Link
+          to="/"
+          className="auth-brand"
+        >
           Pulse<span>IQ</span>
         </Link>
 
@@ -112,7 +225,6 @@ function Login() {
             </div>
 
           </div>
-
         </div>
 
         <div className="auth-side-footer">
@@ -120,6 +232,10 @@ function Login() {
         </div>
 
       </div>
+
+      {/* =====================================================
+          RIGHT FORM SIDE
+      ===================================================== */}
 
       <div className="auth-form-side">
 
@@ -148,6 +264,10 @@ function Login() {
 
           </div>
 
+          {/* =================================================
+              LOGIN FORM
+          ================================================= */}
+
           <form
             className="auth-form"
             onSubmit={handleSubmit}
@@ -162,8 +282,8 @@ function Login() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
+                onChange={(event) =>
+                  setEmail(event.target.value)
                 }
                 placeholder="you@company.com"
                 required
@@ -180,8 +300,8 @@ function Login() {
               <input
                 type="password"
                 value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
+                onChange={(event) =>
+                  setPassword(event.target.value)
                 }
                 placeholder="Enter your password"
                 required
@@ -217,8 +337,7 @@ function Login() {
           </div>
 
           <div className="auth-switch">
-            Don't have an account?
-            {" "}
+            Don't have an account?{" "}
 
             <Link to="/signup">
               Create one

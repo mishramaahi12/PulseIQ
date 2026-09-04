@@ -1,93 +1,132 @@
 import Navbar from "../components/navbar";
-import Pricing from "../components/pricing";
-import Testimonials from "../components/testimonials";
 import TrustedBy from "../components/trustedby";
-import Contact from "../components/contact";
+import ScrollReveal from "../components/ScrollReveal";
 import "./home.css";
+import "../components/scrollReveal.css";
 
 function Home() {
   return (
     <div className="home-page">
+
       {/* NAVBAR */}
       <Navbar />
 
       {/* HERO */}
       <section className="hero-section" id="home">
-        <div className="hero-copy">
+
+        <ScrollReveal className="hero-copy">
           <span className="hero-label">
-            BUSINESS INTELLIGENCE, WITHOUT THE NOISE
+            PULSEIQ / BUSINESS INTELLIGENCE
           </span>
 
           <h1>
-            Know what your <em>business</em> needs next.
+            What if your business
+            <br />
+            could <em>answer back?</em>
           </h1>
 
           <p>
-            PulseIQ turns scattered business numbers into clear signals,
-            useful insights and confident decisions — without the spreadsheet
-            chaos.
+            Your numbers already know more than they show.
+            PulseIQ helps you ask better questions, understand
+            what is happening and discover what deserves your attention.
           </p>
 
           <div className="hero-actions">
             <a href="/signup" className="primary-button">
-              Start building your dashboard
+              Ask PulseIQ →
             </a>
 
-            <a href="#features" className="secondary-button">
-              Explore PulseIQ
+            <a href="/features" className="secondary-button">
+              Explore the platform
             </a>
           </div>
 
           <div className="hero-note">
-            No credit card required · Start with sample data
+            Your data · Your questions · Your advantage
           </div>
-        </div>
+        </ScrollReveal>
+
 
         {/* DASHBOARD PREVIEW */}
-        <div className="hero-preview">
+        <ScrollReveal
+          direction="right"
+          className="hero-preview"
+        >
+
+          
+
+
           <div className="preview-window">
+
             <div className="preview-top">
               <span></span>
               <span></span>
               <span></span>
             </div>
 
+
             <div className="preview-content">
+
               <div className="preview-kicker">
-                BUSINESS OVERVIEW
+                PULSEIQ / BUSINESS PULSE
               </div>
 
               <h3>
-                Your numbers, finally in one place.
+                Your business, without the fog.
               </h3>
 
               <p className="preview-note">
-                Revenue performance · Last 7 months
+                What is happening right now
               </p>
 
+
               <div className="preview-cards">
-                <div className="preview-card">
-                  <small>Revenue</small>
-                  <strong>₹12.4L</strong>
-                </div>
 
                 <div className="preview-card">
-                  <small>Growth</small>
-                  <strong>+32%</strong>
+                  <small>
+                    Revenue
+                  </small>
+
+                  <strong>
+                    ₹12.4L
+                  </strong>
                 </div>
+
+
+                <div className="preview-card">
+                  <small>
+                    Customers
+                  </small>
+
+                  <strong>
+                    2,841
+                  </strong>
+                </div>
+
               </div>
 
+
               <div className="preview-chart-wrap">
+
                 <div className="preview-chart-header">
-                  <span>Revenue trend</span>
-                  <strong>+32.4%</strong>
+
+                  <span>
+                    Business movement
+                  </span>
+
+                  <strong>
+                    +18.4%
+                  </strong>
+
                 </div>
+
 
                 <svg
                   className="preview-svg"
                   viewBox="0 0 600 180"
                   preserveAspectRatio="none"
                 >
+
                   <line
                     x1="0"
                     y1="145"
@@ -112,6 +151,7 @@ function Home() {
                     stroke="rgba(255,255,255,0.08)"
                   />
 
+
                   <polyline
                     points="
                       0,138
@@ -130,13 +170,55 @@ function Home() {
                     strokeLinejoin="round"
                   />
 
-                  <circle cx="0" cy="138" r="5" fill="#22d3ee" />
-                  <circle cx="85" cy="120" r="5" fill="#22d3ee" />
-                  <circle cx="170" cy="128" r="5" fill="#22d3ee" />
-                  <circle cx="255" cy="93" r="5" fill="#22d3ee" />
-                  <circle cx="340" cy="105" r="5" fill="#22d3ee" />
-                  <circle cx="425" cy="62" r="5" fill="#22d3ee" />
-                  <circle cx="510" cy="72" r="5" fill="#22d3ee" />
+
+                  <circle
+                    cx="0"
+                    cy="138"
+                    r="5"
+                    fill="#22d3ee"
+                  />
+
+                  <circle
+                    cx="85"
+                    cy="120"
+                    r="5"
+                    fill="#22d3ee"
+                  />
+
+                  <circle
+                    cx="170"
+                    cy="128"
+                    r="5"
+                    fill="#22d3ee"
+                  />
+
+                  <circle
+                    cx="255"
+                    cy="93"
+                    r="5"
+                    fill="#22d3ee"
+                  />
+
+                  <circle
+                    cx="340"
+                    cy="105"
+                    r="5"
+                    fill="#22d3ee"
+                  />
+
+                  <circle
+                    cx="425"
+                    cy="62"
+                    r="5"
+                    fill="#22d3ee"
+                  />
+
+                  <circle
+                    cx="510"
+                    cy="72"
+                    r="5"
+                    fill="#22d3ee"
+                  />
 
                   <circle
                     cx="600"
@@ -146,221 +228,687 @@ function Home() {
                     stroke="#22d3ee"
                     strokeWidth="4"
                   />
+
                 </svg>
+
               </div>
+
             </div>
+
           </div>
-        </div>
+
+        </ScrollReveal>
+
       </section>
+
 
       {/* TRUSTED BY */}
-      <TrustedBy />
+      <ScrollReveal>
+        <TrustedBy />
+      </ScrollReveal>
 
-            {/* FEATURES */}
-      <section
-        id="features"
-        className="home-section"
-      >
-        <span className="section-label">
-          WHAT PULSEIQ DOES
-        </span>
 
-        <h2>
-          Your data has a story.
-          <br />
-          We help you read it.
-        </h2>
+      {/* THE PROBLEM */}
+      <section className="home-story-section">
 
-        <p className="section-intro">
-          PulseIQ turns scattered business numbers into signals
-          you can understand, questions you can ask, and decisions
-          you can act on.
-        </p>
+        <ScrollReveal>
 
-        <div className="feature-grid">
-
-          <div className="feature-card">
-            <span className="feature-number">01</span>
-
-            <h3>
-              Find the signal.
-            </h3>
-
-            <p>
-              Revenue went up. Customers dropped. Orders changed.
-              PulseIQ brings those movements together so you know
-              what deserves your attention.
-            </p>
-          </div>
-
-          <div className="feature-card">
-            <span className="feature-number">02</span>
-
-            <h3>
-              Talk to your numbers.
-            </h3>
-
-            <p>
-              Instead of searching through rows and charts, ask
-              Prism AI what changed, what matters and where your
-              next opportunity could be.
-            </p>
-          </div>
-
-          <div className="feature-card">
-            <span className="feature-number">03</span>
-
-            <h3>
-              Turn insight into action.
-            </h3>
-
-            <p>
-              Numbers are useful only when they lead somewhere.
-              PulseIQ helps turn patterns and opportunities into
-              clearer, smarter business moves.
-            </p>
-          </div>
-
-        </div>
-      </section>
-      {/* ABOUT */}
-      <section
-        id="about"
-        className="about-section"
-      >
-        <div className="about-copy">
           <span className="section-label">
-            ABOUT PULSEIQ
+            THE PROBLEM
           </span>
 
           <h2>
-            Less time understanding the data.
-            More time acting on it.
+            You don't need another report.
+            <br />
+            You need to know what the report
+            <br />
+            <em>isn't telling you.</em>
           </h2>
-        </div>
 
-        <div>
-          <p className="about-description">
-            PulseIQ is built for businesses that have plenty
-            of numbers but not enough clarity. It brings
-            everyday business information into one intelligent
-            workspace so important signals are easier to find,
-            understand and act on.
+          <p className="section-intro">
+            The obvious numbers are easy to find.
+            The important ones aren't.
           </p>
 
-          <div className="about-points">
-            <div className="about-point">
-              <div className="about-point-icon">✓</div>
+        </ScrollReveal>
+
+      </section>
+
+
+      {/* DATA TO DIRECTION */}
+      <section className="home-flow-section">
+
+        <ScrollReveal>
+
+          <span className="section-label">
+            FROM DATA TO DIRECTION
+          </span>
+
+          <h2>
+            Somewhere between
+            <br />
+            <span className="accent-text">
+              10,000 rows
+            </span>{" "}
+            and
+            <br />
+            one decision, clarity gets lost.
+          </h2>
+
+        </ScrollReveal>
+
+
+        <div className="data-flow">
+
+          <ScrollReveal delay={0}>
+            <div className="data-flow-item">
+
+              <strong>
+                10,000+
+              </strong>
 
               <span>
-                One workspace for the numbers that matter.
+                Rows
               </span>
-            </div>
 
-            <div className="about-point">
-              <div className="about-point-icon">✓</div>
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={100}>
+            <div className="data-flow-arrow">
+              ↓
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={150}>
+            <div className="data-flow-item">
+
+              <strong>
+                347
+              </strong>
 
               <span>
-                Insights designed around decisions, not dashboards.
+                Metrics
               </span>
-            </div>
 
-            <div className="about-point">
-              <div className="about-point-icon">✓</div>
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={250}>
+            <div className="data-flow-arrow">
+              ↓
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={300}>
+            <div className="data-flow-item">
+
+              <strong>
+                29
+              </strong>
 
               <span>
-                Built to make business intelligence feel simple.
+                Changes
               </span>
+
             </div>
-          </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={400}>
+            <div className="data-flow-arrow">
+              ↓
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={450}>
+            <div className="data-flow-item highlight">
+
+              <strong>
+                7
+              </strong>
+
+              <span>
+                Important signals
+              </span>
+
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={550}>
+            <div className="data-flow-arrow">
+              ↓
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={600}>
+            <div className="data-flow-item final">
+
+              <strong>
+                1
+              </strong>
+
+              <span>
+                Clear direction
+              </span>
+
+            </div>
+          </ScrollReveal>
+
         </div>
+
       </section>
 
-      {/* WHY PULSEIQ */}
-      <section
-        id="why"
-        className="why-section"
-      >
-        <span className="section-label">
-          WHY CHOOSE PULSEIQ
-        </span>
 
-        <h2>
-          Intelligence that earns
-          <br />
-          its place in your workflow.
-        </h2>
+      {/* ASK YOUR BUSINESS */}
+      <section className="ask-business-section">
 
-        <p className="why-intro">
-          Good analytics should not make your work more
-          complicated. PulseIQ focuses on the signals,
-          explains what they mean and helps you decide
-          what deserves attention next.
-        </p>
+        <ScrollReveal>
 
-        <div className="why-grid">
-          <div className="why-card">
-            <span className="why-card-number">01</span>
+          <span className="section-label">
+            ASK YOUR BUSINESS
+          </span>
 
-            <h3>Clarity first</h3>
+          <h2>
+            If you could ask your business
+            <br />
+            one question right now,
+            <br />
+            <em>what would it be?</em>
+          </h2>
 
-            <p>
-              Important numbers stay visible instead of
-              getting buried under unnecessary dashboards.
-            </p>
-          </div>
+        </ScrollReveal>
 
-          <div className="why-card">
-            <span className="why-card-number">02</span>
 
-            <h3>Decisions, not decoration</h3>
+        <div className="question-grid">
 
-            <p>
-              Every insight should answer the question:
-              what should I do next?
-            </p>
-          </div>
+          <ScrollReveal delay={0}>
+            <div className="question-card">
+              <span>
+                Why are sales slowing down?
+              </span>
 
-          <div className="why-card">
-            <span className="why-card-number">03</span>
+              <span className="question-arrow">
+                →
+              </span>
+            </div>
+          </ScrollReveal>
 
-            <h3>AI that explains</h3>
 
-            <p>
-              Prism AI turns patterns into understandable
-              business language instead of confusing output.
-            </p>
-          </div>
+          <ScrollReveal delay={100}>
+            <div className="question-card">
+              <span>
+                Which customers are leaving?
+              </span>
 
-          <div className="why-card">
-            <span className="why-card-number">04</span>
+              <span className="question-arrow">
+                →
+              </span>
+            </div>
+          </ScrollReveal>
 
-            <h3>Made for real teams</h3>
 
-            <p>
-              No analytics degree required. Bring your data
-              and start finding useful answers.
-            </p>
-          </div>
+          <ScrollReveal delay={200}>
+            <div className="question-card">
+              <span>
+                What's actually driving growth?
+              </span>
+
+              <span className="question-arrow">
+                →
+              </span>
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={300}>
+            <div className="question-card">
+              <span>
+                Where are we losing money?
+              </span>
+
+              <span className="question-arrow">
+                →
+              </span>
+            </div>
+          </ScrollReveal>
+
+
+          <ScrollReveal delay={400}>
+            <div className="question-card">
+              <span>
+                What changed this week?
+              </span>
+
+              <span className="question-arrow">
+                →
+              </span>
+            </div>
+          </ScrollReveal>
+
         </div>
+
       </section>
 
-      {/* PRICING */}
-      <section id="pricing">
-        <Pricing />
+
+      {/* ANSWER */}
+      <section className="answer-section">
+
+        <ScrollReveal direction="left">
+
+          <div className="answer-question">
+
+            <span className="section-label">
+              YOUR QUESTION
+            </span>
+
+            <h3>
+              Why did our revenue fall this month?
+            </h3>
+
+          </div>
+
+        </ScrollReveal>
+
+
+        <ScrollReveal direction="right">
+
+          <div className="answer-box">
+
+            <span className="section-label">
+              PULSEIQ ANSWER
+            </span>
+
+            <h2>
+              Revenue fell{" "}
+              <span className="accent-text">
+                7.2%
+              </span>.
+            </h2>
+
+            <p>
+              But the bigger story is that returning customers
+              purchased less frequently, while new-customer
+              acquisition remained stable.
+            </p>
+
+
+            <div className="answer-insight">
+
+              <span>
+                REPEAT PURCHASES
+              </span>
+
+              <strong>
+                -14%
+              </strong>
+
+            </div>
+
+
+            <div className="answer-insight">
+
+              <span>
+                NEW CUSTOMERS
+              </span>
+
+              <strong>
+                +3.8%
+              </strong>
+
+            </div>
+
+          </div>
+
+        </ScrollReveal>
+
       </section>
 
-      {/* TESTIMONIALS */}
-      <Testimonials />
 
-      {/* CONTACT */}
-      <section id="contact" className="contact-wrapper">
-        <Contact />
+      {/* THE AHA MOMENT */}
+      <section className="aha-section">
+
+        <ScrollReveal>
+
+          <span className="section-label">
+            THE MOMENT THAT MATTERS
+          </span>
+
+          <h2>
+            Sometimes the most valuable number
+            <br />
+            is the one you
+            <br />
+            <em>weren't looking for.</em>
+          </h2>
+
+        </ScrollReveal>
+
+
+        <ScrollReveal delay={200}>
+
+          <div className="aha-card">
+
+            <div className="aha-main">
+              Revenue looks healthy.
+            </div>
+
+            <div className="aha-warning">
+              Repeat purchases ↓ 14%
+            </div>
+
+            <p>
+              That's the number worth noticing.
+            </p>
+
+          </div>
+
+        </ScrollReveal>
+
       </section>
+
+
+      {/* PRISM AI */}
+      <section className="prism-preview-section">
+
+        <ScrollReveal>
+
+          <span className="section-label">
+            PRISM AI / YOUR BUSINESS COPILOT
+          </span>
+
+          <h2>
+            Talk to the numbers.
+            <br />
+            <em>Not the spreadsheet.</em>
+          </h2>
+
+          <p className="section-intro">
+            Ask questions the way you'd ask a person on your team.
+            Prism AI turns your business data into answers you can
+            actually understand.
+          </p>
+
+        </ScrollReveal>
+
+
+        <div className="prism-chat-preview">
+
+          <ScrollReveal direction="left">
+
+            <div className="chat-message user-message">
+
+              <span className="chat-label">
+                YOU
+              </span>
+
+              <p>
+                What should I be worried about?
+              </p>
+
+            </div>
+
+          </ScrollReveal>
+
+
+          <ScrollReveal
+            direction="right"
+            delay={200}
+          >
+
+            <div className="chat-message ai-message">
+
+              <span className="chat-label">
+                PRISM AI
+              </span>
+
+              <p>
+                Your revenue is healthy, but repeat purchases
+                have fallen for three weeks.
+              </p>
+
+              <div className="ai-detail">
+                The biggest change is coming from customers
+                acquired through your January campaign.
+              </div>
+
+            </div>
+
+          </ScrollReveal>
+
+
+          <ScrollReveal
+            direction="left"
+            delay={400}
+          >
+
+            <div className="chat-message user-message">
+
+              <span className="chat-label">
+                YOU
+              </span>
+
+              <p>
+                What should I do?
+              </p>
+
+            </div>
+
+          </ScrollReveal>
+
+
+          <ScrollReveal
+            direction="right"
+            delay={600}
+          >
+
+            <div className="chat-message ai-message">
+
+              <span className="chat-label">
+                PRISM AI
+              </span>
+
+              <p>
+                Start by reviewing the post-purchase journey
+                for that customer segment.
+              </p>
+
+            </div>
+
+          </ScrollReveal>
+
+        </div>
+
+
+        <ScrollReveal delay={700}>
+
+          <a
+            href="/prismai"
+            className="primary-button prism-button"
+          >
+            Meet Prism AI →
+          </a>
+
+        </ScrollReveal>
+
+      </section>
+
+
+      {/* PULSEIQ PROMISE */}
+      <section className="promise-section">
+
+        <ScrollReveal>
+
+          <span className="section-label">
+            THE PULSEIQ PROMISE
+          </span>
+
+        </ScrollReveal>
+
+
+        <ScrollReveal delay={100}>
+
+          <div className="promise-item">
+
+            <strong>
+              NOTICE.
+            </strong>
+
+            <span>
+              Don't miss what changed.
+            </span>
+
+          </div>
+
+        </ScrollReveal>
+
+
+        <ScrollReveal delay={250}>
+
+          <div className="promise-item">
+
+            <strong>
+              QUESTION.
+            </strong>
+
+            <span>
+              Don't settle for what happened.
+            </span>
+
+          </div>
+
+        </ScrollReveal>
+
+
+        <ScrollReveal delay={400}>
+
+          <div className="promise-item">
+
+            <strong>
+              MOVE.
+            </strong>
+
+            <span>
+              Don't wait until it's too late.
+            </span>
+
+          </div>
+
+        </ScrollReveal>
+
+
+        <ScrollReveal delay={550}>
+
+          <p className="promise-ending">
+
+            PulseIQ exists for the space between
+            <br />
+
+            <span>
+              "something changed"
+            </span>
+
+            <br />
+
+            and
+            <br />
+
+            <span>
+              "what do we do about it?"
+            </span>
+
+          </p>
+
+        </ScrollReveal>
+
+      </section>
+
+
+      {/* VISION */}
+      <section className="vision-section">
+
+        <ScrollReveal>
+
+          <span className="section-label">
+            THIS IS JUST THE BEGINNING
+          </span>
+
+          <h2>
+            Imagine knowing where to look
+            <br />
+            before you know what
+            <br />
+            you're looking for.
+          </h2>
+
+          <p>
+            That's the kind of business intelligence we're building.
+          </p>
+
+
+          <div className="vision-brand">
+
+            <strong>
+              Pulse<span>IQ</span>
+            </strong>
+
+            <small>
+              Less searching. More knowing.
+            </small>
+
+          </div>
+
+        </ScrollReveal>
+
+      </section>
+
+
+      {/* FINAL CTA */}
+      <section className="final-cta-section">
+
+        <ScrollReveal>
+
+          <span className="section-label">
+            YOUR NEXT QUESTION STARTS HERE
+          </span>
+
+          <h2>
+            Go ahead.
+            <br />
+            Ask your business
+            <br />
+            <em>something.</em>
+          </h2>
+
+          <p>
+            Start with your own data or explore PulseIQ
+            with sample data.
+          </p>
+
+          <a
+            href="/signup"
+            className="primary-button"
+          >
+            Try PulseIQ →
+          </a>
+
+        </ScrollReveal>
+
+      </section>
+
 
       {/* FOOTER */}
       <footer className="site-footer">
+
         <div className="footer-brand">
+
           <strong>
             Pulse<span>IQ</span>
           </strong>
@@ -368,20 +916,45 @@ function Home() {
           <span>
             Business intelligence for smarter decisions.
           </span>
+
         </div>
 
+
         <div className="footer-links">
-          <a href="#home">Home</a>
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact">Contact</a>
+
+          <a href="/">
+            Home
+          </a>
+
+          <a href="/features">
+            Features
+          </a>
+
+          <a href="/about">
+            About
+          </a>
+
+          <a href="/why">
+            Why PulseIQ
+          </a>
+
+          <a href="/pricing">
+            Pricing
+          </a>
+
+          <a href="/contact">
+            Contact
+          </a>
+
         </div>
+
 
         <div className="footer-copy">
           © 2026 PulseIQ. All rights reserved.
         </div>
+
       </footer>
+
     </div>
   );
 }

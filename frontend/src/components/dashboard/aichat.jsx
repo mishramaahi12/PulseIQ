@@ -38,6 +38,7 @@ function AIChat({ onClose }) {
     "Show my sales performance",
     "What are my top products?",
     "Give me a revenue forecast",
+    "What are my total expenses?",
   ];
 
   // =========================================================
@@ -61,7 +62,50 @@ function AIChat({ onClose }) {
     "data",
     "analysis",
     "analyze",
+
+    // Expenses
+    "expense",
+    "expenses",
+    "spending",
+    "spent",
+    "spend",
+    "cost",
+    "costs",
+    "saving",
+    "savings",
   ];
+
+  // =========================================================
+  // GET USER ID
+  // =========================================================
+
+  const getUserId = () => {
+    try {
+      const raw = localStorage.getItem("pulseiq_user");
+
+      if (!raw) {
+        return null;
+      }
+
+      const parsed = JSON.parse(raw);
+
+      if (
+        typeof parsed === "number" ||
+        typeof parsed === "string"
+      ) {
+        return parsed;
+      }
+
+      return (
+        parsed?.id ??
+        parsed?.user_id ??
+        parsed?.userId ??
+        null
+      );
+    } catch {
+      return null;
+    }
+  };
 
   // =========================================================
   // GREETING CHECK
@@ -131,7 +175,6 @@ function AIChat({ onClose }) {
     setPendingQuestion(question);
 
     setMessages((prev) => {
-      // Prevent duplicate source selectors
       const alreadyExists = prev.some(
         (item) => item.type === "source_selector"
       );
@@ -150,42 +193,6 @@ function AIChat({ onClose }) {
   };
 
   // =========================================================
-  // CHECK UPLOADED DATASET
-  // =========================================================
-
-  const checkUploadedDataset = async () => {
-    try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/dataset"
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || data.status !== "uploaded") {
-        return {
-          uploaded: false,
-          data: null,
-          error: false,
-        };
-      }
-
-      return {
-        uploaded: true,
-        data,
-        error: false,
-      };
-    } catch (error) {
-      console.error("Dataset check error:", error);
-
-      return {
-        uploaded: false,
-        data: null,
-        error: true,
-      };
-    }
-  };
-
-  // =========================================================
   // SEND QUESTION TO BACKEND
   // =========================================================
 
@@ -193,9 +200,11 @@ function AIChat({ onClose }) {
     userMessage,
     selectedSource
   ) => {
-    setLoading(true);
-
     try {
+      setLoading(true);
+
+      const userId = getUserId();
+
       const response = await fetch(
         "http://127.0.0.1:8000/ai",
         {
@@ -203,6 +212,12 @@ function AIChat({ onClose }) {
 
           headers: {
             "Content-Type": "application/json",
+
+            ...(userId
+              ? {
+                  "x-user-id": String(userId),
+                }
+              : {}),
           },
 
           body: JSON.stringify({
@@ -216,23 +231,22 @@ function AIChat({ onClose }) {
 
       if (!response.ok) {
         throw new Error(
-          data.detail || "Prism AI request failed."
+          data?.detail ||
+            "Prism AI request failed"
         );
       }
 
-      if (data.reply) {
-        addAIMessage(data.reply);
-      } else {
-        addAIMessage(
-          "I couldn't generate an answer right now. Please try again."
-        );
-      }
+      return data;
     } catch (error) {
-      console.error("Prism AI error:", error);
-
-      addAIMessage(
-        "Sorry, I couldn't connect to Prism AI right now. Please try again in a few seconds."
+      console.error(
+        "Prism AI error:",
+        error
       );
+
+      return {
+        reply:
+          "Sorry, I couldn't connect to Prism AI right now.",
+      };
     } finally {
       setLoading(false);
     }
@@ -246,7 +260,8 @@ function AIChat({ onClose }) {
     // Remove source selector
     setMessages((prev) =>
       prev.filter(
-        (item) => item.type !== "source_selector"
+        (item) =>
+          item.type !== "source_selector"
       )
     );
 
@@ -254,80 +269,37 @@ function AIChat({ onClose }) {
     setSource(selectedSource);
 
     // Save original question
-    const questionToAnalyze = pendingQuestion;
+    const questionToAnalyze =
+      pendingQuestion;
 
     // Clear pending question
     setPendingQuestion(null);
 
-    // Show source selection as user's message
+    // Show selected source
     addUserMessage(
       selectedSource === "actual"
         ? "My Uploaded Data"
         : "Demo Data"
     );
 
-    // =======================================================
-    // MY UPLOADED DATA
-    // =======================================================
-
-    if (selectedSource === "actual") {
-      setLoading(true);
-
-      const result = await checkUploadedDataset();
-
-      setLoading(false);
-
-      // No uploaded dataset
-      if (!result.uploaded) {
-        if (result.error) {
-          addAIMessage(
-            "I couldn't check your uploaded data right now. Please make sure the PulseIQ backend is running."
-          );
-        } else {
-          addAIMessage(
-            "You haven't uploaded a dataset yet. Please upload your CSV or Excel file first, then I'll analyze your real business data."
-          );
-        }
-
-        return;
-      }
-
-      // Dataset exists
-      addAIMessage(
-        `Got it. I'll use your uploaded data${
-          result.data?.filename
-            ? ` (${result.data.filename})`
-            : ""
-        } for this conversation.`
-      );
-
-      // IMPORTANT:
-      // Answer the original question automatically
-      if (questionToAnalyze) {
-        await sendToBackend(
-          questionToAnalyze,
-          "actual"
-        );
-      }
-
-      return;
-    }
-
-    // =======================================================
-    // DEMO DATA
-    // =======================================================
-
+    // Inform user about selected source
     addAIMessage(
-      "Got it. I'll use PulseIQ's demo data for this conversation."
+      selectedSource === "actual"
+        ? "Got it. I'll use your data for this conversation."
+        : "Got it. I'll use PulseIQ's demo data for this conversation."
     );
 
-    // IMPORTANT:
-    // Answer the original question automatically
+    // Send original question
     if (questionToAnalyze) {
-      await sendToBackend(
-        questionToAnalyze,
-        "demo"
-      );
+      const result =
+        await sendToBackend(
+          questionToAnalyze,
+          selectedSource
+        );
+
+      if (result?.reply) {
+        addAIMessage(result.reply);
+      }
     }
   };
 
@@ -339,55 +311,19 @@ function AIChat({ onClose }) {
     selectedSource,
     userText
   ) => {
-    // Update source
     setSource(selectedSource);
 
-    // Show user's source switch message
     addUserMessage(userText);
 
-    // =======================================================
-    // MY DATA
-    // =======================================================
-
     if (selectedSource === "actual") {
-      setLoading(true);
-
-      const result = await checkUploadedDataset();
-
-      setLoading(false);
-
-      if (!result.uploaded) {
-        if (result.error) {
-          addAIMessage(
-            "I couldn't check your uploaded data right now. Please make sure the PulseIQ backend is running."
-          );
-        } else {
-          addAIMessage(
-            "You haven't uploaded a dataset yet. Please upload your CSV or Excel file first, then I'll analyze your real business data."
-          );
-        }
-
-        return;
-      }
-
       addAIMessage(
-        `Got it. I'll use your uploaded data${
-          result.data?.filename
-            ? ` (${result.data.filename})`
-            : ""
-        } for this conversation.`
+        "Got it. I'll use your data for this conversation."
       );
-
-      return;
+    } else {
+      addAIMessage(
+        "Got it. I'll use PulseIQ's demo data for this conversation."
+      );
     }
-
-    // =======================================================
-    // DEMO DATA
-    // =======================================================
-
-    addAIMessage(
-      "Got it. I'll use PulseIQ's demo data for this conversation."
-    );
   };
 
   // =========================================================
@@ -420,7 +356,6 @@ function AIChat({ onClose }) {
         "demo",
         userMessage
       );
-
       return;
     }
 
@@ -438,7 +373,6 @@ function AIChat({ onClose }) {
         "actual",
         userMessage
       );
-
       return;
     }
 
@@ -471,7 +405,6 @@ function AIChat({ onClose }) {
       isAnalyticalQuestion(userMessage)
     ) {
       showSourceSelector(userMessage);
-
       return;
     }
 
@@ -482,10 +415,15 @@ function AIChat({ onClose }) {
     const selectedSource =
       source || "demo";
 
-    await sendToBackend(
-      userMessage,
-      selectedSource
-    );
+    const result =
+      await sendToBackend(
+        userMessage,
+        selectedSource
+      );
+
+    if (result?.reply) {
+      addAIMessage(result.reply);
+    }
   };
 
   // =========================================================
@@ -511,9 +449,7 @@ function AIChat({ onClose }) {
         =================================================== */}
 
         <div className="ai-chat-header">
-
           <div className="ai-chat-title">
-
             <div className="ai-chat-icon">
               <Sparkles size={18} />
             </div>
@@ -525,7 +461,6 @@ function AIChat({ onClose }) {
                 Business Intelligence Assistant
               </span>
             </div>
-
           </div>
 
           <button
@@ -536,7 +471,6 @@ function AIChat({ onClose }) {
           >
             <X size={20} />
           </button>
-
         </div>
 
         {/* ===================================================
@@ -545,130 +479,128 @@ function AIChat({ onClose }) {
 
         <div className="ai-chat-messages">
 
-          {messages.map((item, index) => {
+          {messages.map(
+            (item, index) => {
 
-            {/* SOURCE SELECTOR */}
+              {/* SOURCE SELECTOR */}
 
-            if (
-              item.type === "source_selector"
-            ) {
+              if (
+                item.type ===
+                "source_selector"
+              ) {
+                return (
+                  <div
+                    className="ai-source-wrapper"
+                    key={index}
+                  >
+                    <div className="ai-source-title">
+                      <Database size={17} />
+
+                      <span>
+                        Which data should I use
+                        for this analysis?
+                      </span>
+                    </div>
+
+                    <div className="ai-source-options">
+
+                      {/* MY UPLOADED DATA */}
+
+                      <button
+                        type="button"
+                        className="ai-source-card"
+                        onClick={() =>
+                          selectSource(
+                            "actual"
+                          )
+                        }
+                        disabled={loading}
+                      >
+                        <div className="ai-source-icon">
+                          <BarChart3
+                            size={17}
+                          />
+                        </div>
+
+                        <div className="ai-source-content">
+                          <strong>
+                            My Uploaded Data
+                          </strong>
+
+                          <span>
+                            Analyze my business data
+                          </span>
+                        </div>
+                      </button>
+
+                      {/* DEMO DATA */}
+
+                      <button
+                        type="button"
+                        className="ai-source-card"
+                        onClick={() =>
+                          selectSource(
+                            "demo"
+                          )
+                        }
+                        disabled={loading}
+                      >
+                        <div className="ai-source-icon">
+                          <Database
+                            size={17}
+                          />
+                        </div>
+
+                        <div className="ai-source-content">
+                          <strong>
+                            Demo Data
+                          </strong>
+
+                          <span>
+                            Use PulseIQ sample data
+                          </span>
+                        </div>
+                      </button>
+
+                    </div>
+                  </div>
+                );
+              }
+
+              {/* NORMAL CHAT MESSAGE */}
+
               return (
                 <div
-                  className="ai-source-wrapper"
                   key={index}
+                  className={`ai-message-row ${
+                    item.type === "user"
+                      ? "ai-row-user"
+                      : "ai-row-bot"
+                  }`}
                 >
+                  {/* AI AVATAR */}
 
-                  <div className="ai-source-title">
+                  {item.type === "ai" && (
+                    <div className="ai-avatar">
+                      <Bot size={15} />
+                    </div>
+                  )}
 
-                    <Database size={17} />
+                  {/* MESSAGE BUBBLE */}
 
-                    <span>
-                      Which data should I use for this analysis?
-                    </span>
-
+                  <div
+                    className={`ai-message ${
+                      item.type === "user"
+                        ? "ai-message-user"
+                        : "ai-message-bot"
+                    }`}
+                  >
+                    {item.text}
                   </div>
-
-                  <div className="ai-source-options">
-
-                    {/* MY UPLOADED DATA */}
-
-                    <button
-                      type="button"
-                      className="ai-source-card"
-                      onClick={() =>
-                        selectSource("actual")
-                      }
-                      disabled={loading}
-                    >
-
-                      <div className="ai-source-icon">
-                        <BarChart3 size={17} />
-                      </div>
-
-                      <div className="ai-source-content">
-
-                        <strong>
-                          My Uploaded Data
-                        </strong>
-
-                        <span>
-                          Analyze my business data
-                        </span>
-
-                      </div>
-
-                    </button>
-
-                    {/* DEMO DATA */}
-
-                    <button
-                      type="button"
-                      className="ai-source-card"
-                      onClick={() =>
-                        selectSource("demo")
-                      }
-                      disabled={loading}
-                    >
-
-                      <div className="ai-source-icon">
-                        <Database size={17} />
-                      </div>
-
-                      <div className="ai-source-content">
-
-                        <strong>
-                          Demo Data
-                        </strong>
-
-                        <span>
-                          Use PulseIQ sample data
-                        </span>
-
-                      </div>
-
-                    </button>
-
-                  </div>
-
                 </div>
               );
             }
-
-            {/* NORMAL CHAT MESSAGE */}
-
-            return (
-              <div
-                key={index}
-                className={`ai-message-row ${
-                  item.type === "user"
-                    ? "ai-row-user"
-                    : "ai-row-bot"
-                }`}
-              >
-
-                {/* AI AVATAR */}
-
-                {item.type === "ai" && (
-                  <div className="ai-avatar">
-                    <Bot size={15} />
-                  </div>
-                )}
-
-                {/* MESSAGE BUBBLE */}
-
-                <div
-                  className={`ai-message ${
-                    item.type === "user"
-                      ? "ai-message-user"
-                      : "ai-message-bot"
-                  }`}
-                >
-                  {item.text}
-                </div>
-
-              </div>
-            );
-          })}
+          )}
 
           {/* =================================================
               LOADING
@@ -694,7 +626,6 @@ function AIChat({ onClose }) {
                 </div>
 
               </div>
-
             </div>
           )}
 
@@ -702,16 +633,15 @@ function AIChat({ onClose }) {
 
         {/* ===================================================
             INSTANT QUESTIONS
-
-            IMPORTANT:
-            These stay visible even after messages.
         =================================================== */}
 
         {!loading && (
           <div className="ai-quick-questions">
 
             <div className="ai-quick-title">
-              <span>Try asking</span>
+              <span>
+                Try asking
+              </span>
             </div>
 
             <div className="ai-quick-list">
@@ -723,7 +653,9 @@ function AIChat({ onClose }) {
                     type="button"
                     className="ai-quick-button"
                     onClick={() =>
-                      sendMessage(question)
+                      sendMessage(
+                        question
+                      )
                     }
                     disabled={loading}
                   >
@@ -733,7 +665,6 @@ function AIChat({ onClose }) {
               )}
 
             </div>
-
           </div>
         )}
 
@@ -745,12 +676,13 @@ function AIChat({ onClose }) {
           className="ai-chat-input-area"
           onSubmit={handleSend}
         >
-
           <input
             type="text"
             value={message}
             onChange={(event) =>
-              setMessage(event.target.value)
+              setMessage(
+                event.target.value
+              )
             }
             placeholder="Ask Prism AI something..."
             disabled={loading}
@@ -766,7 +698,6 @@ function AIChat({ onClose }) {
           >
             <Send size={17} />
           </button>
-
         </form>
 
       </div>

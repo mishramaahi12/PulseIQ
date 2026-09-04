@@ -10,31 +10,124 @@ import {
   KeyRound,
   Eye,
   EyeOff,
+  Building2,
+  Phone,
+  Mail,
+  MapPin,
+  Globe,
 } from "lucide-react";
 
 import Sidebar from "../components/dashboard/sidebar";
 import Topbar from "../components/dashboard/topbar";
+
 import "./settings.css";
 
+
 function Settings() {
-  const savedUser =
-    JSON.parse(localStorage.getItem("pulseiq_user")) || {};
 
-  const [name, setName] = useState(savedUser.name || "");
-  const [email, setEmail] = useState(savedUser.email || "");
+  /* =========================================================
+     LOAD SAVED USER
+  ========================================================= */
 
-  const [businessAlerts, setBusinessAlerts] = useState(true);
-  const [aiInsights, setAiInsights] = useState(true);
+  const getSavedUser = () => {
+    try {
+      return (
+        JSON.parse(
+          localStorage.getItem("pulseiq_user") || "{}"
+        ) || {}
+      );
+    } catch {
+      return {};
+    }
+  };
+
+  const savedUser = getSavedUser();
+
+
+  /* =========================================================
+     PROFILE
+  ========================================================= */
+
+  const [name, setName] = useState(
+    savedUser.name ||
+      savedUser.fullName ||
+      savedUser.username ||
+      ""
+  );
+
+  const [email, setEmail] = useState(
+    savedUser.email || ""
+  );
+
+
+  /* =========================================================
+     BUSINESS DETAILS
+  ========================================================= */
+
+  const [companyName, setCompanyName] = useState(
+    savedUser.companyName || ""
+  );
+
+  const [businessPhone, setBusinessPhone] = useState(
+    savedUser.businessPhone || ""
+  );
+
+  const [businessEmail, setBusinessEmail] = useState(
+    savedUser.businessEmail || ""
+  );
+
+  const [businessAddress, setBusinessAddress] = useState(
+    savedUser.businessAddress || ""
+  );
+
+  const [website, setWebsite] = useState(
+    savedUser.website || ""
+  );
+
+
+  /* =========================================================
+     NOTIFICATIONS
+  ========================================================= */
+
+  const [businessAlerts, setBusinessAlerts] =
+    useState(
+      savedUser.businessAlerts ?? true
+    );
+
+  const [aiInsights, setAiInsights] =
+    useState(
+      savedUser.aiInsights ?? true
+    );
+
+
+  /* =========================================================
+     SAVE STATES
+  ========================================================= */
 
   const [saved, setSaved] = useState(false);
 
-  // PASSWORD
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [profileSaved, setProfileSaved] =
+    useState(false);
 
-  const [passwordError, setPasswordError] = useState("");
-  const [passwordSuccess, setPasswordSuccess] = useState(false);
+
+  /* =========================================================
+     PASSWORD
+  ========================================================= */
+
+  const [currentPassword, setCurrentPassword] =
+    useState("");
+
+  const [newPassword, setNewPassword] =
+    useState("");
+
+  const [confirmPassword, setConfirmPassword] =
+    useState("");
+
+  const [passwordError, setPasswordError] =
+    useState("");
+
+  const [passwordSuccess, setPasswordSuccess] =
+    useState(false);
 
   const [showCurrentPassword, setShowCurrentPassword] =
     useState(false);
@@ -45,23 +138,102 @@ function Settings() {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState(false);
 
-  // SAVE PROFILE
-  const saveChanges = (event) => {
+
+  /* =========================================================
+     SAVE PROFILE
+  ========================================================= */
+
+  const saveProfile = (event) => {
+
     event.preventDefault();
 
-    const latestUser =
-      JSON.parse(localStorage.getItem("pulseiq_user")) || {};
+    const latestUser = getSavedUser();
 
     const updatedUser = {
       ...latestUser,
-      name,
-      email,
+
+      name: name.trim(),
+      email: email.trim(),
     };
+
 
     localStorage.setItem(
       "pulseiq_user",
       JSON.stringify(updatedUser)
     );
+
+
+    /* Tell Topbar that profile changed */
+
+    window.dispatchEvent(
+      new Event("pulseiq-user-updated")
+    );
+
+
+    /* Also notify other PulseIQ components */
+
+    window.dispatchEvent(
+      new Event("pulseiq-data-updated")
+    );
+
+
+    setProfileSaved(true);
+
+    setTimeout(() => {
+      setProfileSaved(false);
+    }, 2500);
+  };
+
+
+  /* =========================================================
+     SAVE BUSINESS DETAILS + NOTIFICATIONS
+  ========================================================= */
+
+  const saveChanges = (event) => {
+
+    event.preventDefault();
+
+    const latestUser = getSavedUser();
+
+    const updatedUser = {
+      ...latestUser,
+
+      /* Personal profile */
+
+      name,
+      email,
+
+      /* Business profile */
+
+      companyName,
+      businessPhone,
+      businessEmail,
+      businessAddress,
+      website,
+
+      /* Notifications */
+
+      businessAlerts,
+      aiInsights,
+    };
+
+
+    localStorage.setItem(
+      "pulseiq_user",
+      JSON.stringify(updatedUser)
+    );
+
+
+    /* Tell Topbar that user/business data changed */
+
+    window.dispatchEvent(
+      new Event("pulseiq-user-updated")
+    );
+
+    window.dispatchEvent(
+      new Event("pulseiq-data-updated")
+    );
+
 
     setSaved(true);
 
@@ -70,53 +242,85 @@ function Settings() {
     }, 2500);
   };
 
-  // CHANGE PASSWORD
+
+  /* =========================================================
+     CHANGE PASSWORD
+  ========================================================= */
+
   const changePassword = (event) => {
+
     event.preventDefault();
 
     setPasswordError("");
     setPasswordSuccess(false);
 
-    const latestUser =
-      JSON.parse(localStorage.getItem("pulseiq_user")) || {};
+    const latestUser = getSavedUser();
 
-    // Current password check
-    if (currentPassword !== latestUser.password) {
-      setPasswordError("Current password is incorrect.");
+
+    /* Current password check */
+
+    if (
+      currentPassword !==
+      latestUser.password
+    ) {
+
+      setPasswordError(
+        "Current password is incorrect."
+      );
+
       return;
     }
 
-    // New password length
-    if (newPassword.length < 6) {
+
+    /* New password length */
+
+    if (
+      newPassword.length < 6
+    ) {
+
       setPasswordError(
         "New password must be at least 6 characters."
       );
+
       return;
     }
 
-    // Confirm password
-    if (newPassword !== confirmPassword) {
+
+    /* Confirm password */
+
+    if (
+      newPassword !==
+      confirmPassword
+    ) {
+
       setPasswordError(
         "New password and confirm password do not match."
       );
+
       return;
     }
 
-    // Save NEW password
+
+    /* Save new password */
+
     const updatedUser = {
       ...latestUser,
       password: newPassword,
     };
+
 
     localStorage.setItem(
       "pulseiq_user",
       JSON.stringify(updatedUser)
     );
 
-    // Clear fields
+
+    /* Clear fields */
+
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
+
 
     setPasswordSuccess(true);
 
@@ -125,7 +329,9 @@ function Settings() {
     }, 3000);
   };
 
+
   return (
+
     <div className="dashboard-shell">
 
       <Sidebar />
@@ -136,24 +342,36 @@ function Settings() {
 
         <main className="dashboard-content">
 
-          {/* PAGE HEADING */}
+
+          {/* =================================================
+              PAGE HEADING
+          ================================================= */}
 
           <div className="page-heading">
+
             <div>
+
               <span className="eyebrow">
                 ACCOUNT
               </span>
 
-              <h1>Settings</h1>
+              <h1>
+                Settings
+              </h1>
 
               <p>
-                Manage your PulseIQ account and preferences.
+                Manage your PulseIQ account,
+                business information and preferences.
               </p>
+
             </div>
+
           </div>
 
 
-          {/* PROFILE */}
+          {/* =================================================
+              PROFILE
+          ================================================= */}
 
           <section className="settings-card">
 
@@ -165,7 +383,9 @@ function Settings() {
 
               <div className="settings-header">
 
-                <h2>Profile</h2>
+                <h2>
+                  Profile
+                </h2>
 
                 <p>
                   Update your personal account information.
@@ -176,12 +396,17 @@ function Settings() {
             </div>
 
 
+            {/* PROFILE FORM */}
+
             <form
               className="settings-form"
-              onSubmit={saveChanges}
+              onSubmit={saveProfile}
             >
 
               <div className="settings-fields-row">
+
+
+                {/* FULL NAME */}
 
                 <div className="settings-field">
 
@@ -196,7 +421,9 @@ function Settings() {
                     value={name}
                     autoComplete="name"
                     onChange={(e) =>
-                      setName(e.target.value)
+                      setName(
+                        e.target.value
+                      )
                     }
                     placeholder="Your name"
                     required
@@ -204,6 +431,8 @@ function Settings() {
 
                 </div>
 
+
+                {/* EMAIL */}
 
                 <div className="settings-field">
 
@@ -218,7 +447,9 @@ function Settings() {
                     value={email}
                     autoComplete="email"
                     onChange={(e) =>
-                      setEmail(e.target.value)
+                      setEmail(
+                        e.target.value
+                      )
                     }
                     placeholder="you@example.com"
                     required
@@ -229,25 +460,32 @@ function Settings() {
               </div>
 
 
+              {/* ⭐ PROFILE SAVE BUTTON */}
+
               <div className="settings-save-row">
 
                 <button
                   type="submit"
                   className="settings-save"
                 >
+
                   <Save size={16} />
 
-                  Save changes
+                  Save profile
+
                 </button>
 
-                {saved && (
+
+                {profileSaved && (
+
                   <span className="settings-saved">
 
                     <CheckCircle2 size={16} />
 
-                    Changes saved successfully
+                    Profile updated successfully
 
                   </span>
+
                 )}
 
               </div>
@@ -257,19 +495,245 @@ function Settings() {
           </section>
 
 
-          {/* NOTIFICATIONS */}
+          {/* =================================================
+              BUSINESS INFORMATION
+          ================================================= */}
+
+          <section className="settings-card">
+
+            <div className="settings-card-top">
+
+              <div className="settings-icon blue">
+
+                <Building2 size={19} />
+
+              </div>
+
+              <div className="settings-header">
+
+                <h2>
+                  Business Information
+                </h2>
+
+                <p>
+                  These details will automatically
+                  appear on your PulseIQ invoices.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <form
+              className="settings-form"
+              onSubmit={saveChanges}
+            >
+
+
+              {/* COMPANY NAME */}
+
+              <div className="settings-field">
+
+                <label htmlFor="company-name">
+                  Company Name
+                </label>
+
+                <div className="settings-input-with-icon">
+
+                  <Building2 size={16} />
+
+                  <input
+                    id="company-name"
+                    type="text"
+                    value={companyName}
+                    onChange={(e) =>
+                      setCompanyName(
+                        e.target.value
+                      )
+                    }
+                    placeholder="Enter your company name"
+                  />
+
+                </div>
+
+              </div>
+
+
+              {/* PHONE + BUSINESS EMAIL */}
+
+              <div className="settings-fields-row">
+
+                <div className="settings-field">
+
+                  <label htmlFor="business-phone">
+                    Business Phone
+                  </label>
+
+                  <div className="settings-input-with-icon">
+
+                    <Phone size={16} />
+
+                    <input
+                      id="business-phone"
+                      type="tel"
+                      value={businessPhone}
+                      onChange={(e) =>
+                        setBusinessPhone(
+                          e.target.value
+                        )
+                      }
+                      placeholder="+91 XXXXX XXXXX"
+                    />
+
+                  </div>
+
+                </div>
+
+
+                <div className="settings-field">
+
+                  <label htmlFor="business-email">
+                    Business Email
+                  </label>
+
+                  <div className="settings-input-with-icon">
+
+                    <Mail size={16} />
+
+                    <input
+                      id="business-email"
+                      type="email"
+                      value={businessEmail}
+                      onChange={(e) =>
+                        setBusinessEmail(
+                          e.target.value
+                        )
+                      }
+                      placeholder="business@example.com"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* ADDRESS + WEBSITE */}
+
+              <div className="settings-fields-row">
+
+                <div className="settings-field">
+
+                  <label htmlFor="business-address">
+                    Business Address
+                  </label>
+
+                  <div className="settings-input-with-icon">
+
+                    <MapPin size={16} />
+
+                    <input
+                      id="business-address"
+                      type="text"
+                      value={businessAddress}
+                      onChange={(e) =>
+                        setBusinessAddress(
+                          e.target.value
+                        )
+                      }
+                      placeholder="Enter business address"
+                    />
+
+                  </div>
+
+                </div>
+
+
+                <div className="settings-field">
+
+                  <label htmlFor="business-website">
+                    Website
+                  </label>
+
+                  <div className="settings-input-with-icon">
+
+                    <Globe size={16} />
+
+                    <input
+                      id="business-website"
+                      type="text"
+                      value={website}
+                      onChange={(e) =>
+                        setWebsite(
+                          e.target.value
+                        )
+                      }
+                      placeholder="www.yourcompany.com"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* SAVE BUSINESS */}
+
+              <div className="settings-save-row">
+
+                <button
+                  type="submit"
+                  className="settings-save"
+                >
+
+                  <Save size={16} />
+
+                  Save business details
+
+                </button>
+
+
+                {saved && (
+
+                  <span className="settings-saved">
+
+                    <CheckCircle2 size={16} />
+
+                    Changes saved successfully
+
+                  </span>
+
+                )}
+
+              </div>
+
+            </form>
+
+          </section>
+
+
+          {/* =================================================
+              NOTIFICATIONS
+          ================================================= */}
 
           <section className="settings-card">
 
             <div className="settings-card-top">
 
               <div className="settings-icon orange">
+
                 <Bell size={19} />
+
               </div>
 
               <div className="settings-header">
 
-                <h2>Notifications</h2>
+                <h2>
+                  Notifications
+                </h2>
 
                 <p>
                   Choose what updates you want to receive.
@@ -282,6 +746,9 @@ function Settings() {
 
             <div className="settings-options">
 
+
+              {/* BUSINESS ALERTS */}
+
               <label className="notification-option">
 
                 <div className="notification-option-info">
@@ -291,16 +758,20 @@ function Settings() {
                   </strong>
 
                   <span>
-                    Get notified about important business activity.
+                    Get notified about important
+                    business activity.
                   </span>
 
                 </div>
+
 
                 <input
                   type="checkbox"
                   checked={businessAlerts}
                   onChange={(e) =>
-                    setBusinessAlerts(e.target.checked)
+                    setBusinessAlerts(
+                      e.target.checked
+                    )
                   }
                 />
 
@@ -308,6 +779,8 @@ function Settings() {
 
               </label>
 
+
+              {/* PRISM AI */}
 
               <label className="notification-option">
 
@@ -318,16 +791,20 @@ function Settings() {
                   </strong>
 
                   <span>
-                    Receive useful AI-powered business insights.
+                    Receive useful AI-powered
+                    business insights.
                   </span>
 
                 </div>
+
 
                 <input
                   type="checkbox"
                   checked={aiInsights}
                   onChange={(e) =>
-                    setAiInsights(e.target.checked)
+                    setAiInsights(
+                      e.target.checked
+                    )
                   }
                 />
 
@@ -340,22 +817,29 @@ function Settings() {
           </section>
 
 
-          {/* SECURITY */}
+          {/* =================================================
+              SECURITY
+          ================================================= */}
 
           <section className="settings-card">
 
             <div className="settings-card-top">
 
               <div className="settings-icon green">
+
                 <Shield size={19} />
+
               </div>
 
               <div className="settings-header">
 
-                <h2>Security</h2>
+                <h2>
+                  Security
+                </h2>
 
                 <p>
-                  Manage your password and keep your account secure.
+                  Manage your password and keep
+                  your account secure.
                 </p>
 
               </div>
@@ -368,7 +852,9 @@ function Settings() {
             <div className="security-status">
 
               <div className="security-status-icon">
+
                 <LockKeyhole size={17} />
+
               </div>
 
               <div>
@@ -378,7 +864,8 @@ function Settings() {
                 </strong>
 
                 <span>
-                  Your password is active and protecting your account.
+                  Your password is active and
+                  protecting your account.
                 </span>
 
               </div>
@@ -397,10 +884,13 @@ function Settings() {
               onSubmit={changePassword}
             >
 
+
               <div className="password-section-title">
 
                 <div className="password-section-icon">
+
                   <KeyRound size={17} />
+
                 </div>
 
                 <div>
@@ -437,7 +927,9 @@ function Settings() {
                     }
                     value={currentPassword}
                     onChange={(e) =>
-                      setCurrentPassword(e.target.value)
+                      setCurrentPassword(
+                        e.target.value
+                      )
                     }
                     placeholder="Enter current password"
                     required
@@ -452,11 +944,13 @@ function Settings() {
                       )
                     }
                   >
+
                     {showCurrentPassword ? (
                       <EyeOff size={16} />
                     ) : (
                       <Eye size={16} />
                     )}
+
                   </button>
 
                 </div>
@@ -464,9 +958,12 @@ function Settings() {
               </div>
 
 
-              {/* NEW PASSWORD */}
+              {/* NEW + CONFIRM PASSWORD */}
 
               <div className="settings-fields-row">
+
+
+                {/* NEW PASSWORD */}
 
                 <div className="settings-field">
 
@@ -485,7 +982,9 @@ function Settings() {
                       }
                       value={newPassword}
                       onChange={(e) =>
-                        setNewPassword(e.target.value)
+                        setNewPassword(
+                          e.target.value
+                        )
                       }
                       placeholder="Minimum 6 characters"
                       minLength={6}
@@ -501,11 +1000,13 @@ function Settings() {
                         )
                       }
                     >
+
                       {showNewPassword ? (
                         <EyeOff size={16} />
                       ) : (
                         <Eye size={16} />
                       )}
+
                     </button>
 
                   </div>
@@ -532,7 +1033,9 @@ function Settings() {
                       }
                       value={confirmPassword}
                       onChange={(e) =>
-                        setConfirmPassword(e.target.value)
+                        setConfirmPassword(
+                          e.target.value
+                        )
                       }
                       placeholder="Re-enter new password"
                       minLength={6}
@@ -548,11 +1051,13 @@ function Settings() {
                         )
                       }
                     >
+
                       {showConfirmPassword ? (
                         <EyeOff size={16} />
                       ) : (
                         <Eye size={16} />
                       )}
+
                     </button>
 
                   </div>
@@ -562,18 +1067,23 @@ function Settings() {
               </div>
 
 
-              {/* ERROR */}
+              {/* PASSWORD ERROR */}
 
               {passwordError && (
+
                 <div className="password-message error">
+
                   {passwordError}
+
                 </div>
+
               )}
 
 
-              {/* SUCCESS */}
+              {/* PASSWORD SUCCESS */}
 
               {passwordSuccess && (
+
                 <div className="password-message success">
 
                   <CheckCircle2 size={16} />
@@ -581,10 +1091,11 @@ function Settings() {
                   Password changed successfully.
 
                 </div>
+
               )}
 
 
-              {/* CHANGE BUTTON */}
+              {/* CHANGE PASSWORD BUTTON */}
 
               <div className="password-save-row">
 

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -6,7 +7,6 @@ import {
   FileText,
   Plus,
   Trash2,
-  User,
   CheckCircle,
   Download,
   Building2,
@@ -31,7 +31,6 @@ const createEmptyItem = () => ({
 
 const todayISO = () => {
   const date = new Date();
-
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
@@ -52,9 +51,7 @@ const getNextInvoiceId = () => {
       .filter(Boolean);
 
     const nextNumber =
-      numbers.length > 0
-        ? Math.max(...numbers) + 1
-        : 1;
+      numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
 
     return `INV-${String(nextNumber).padStart(4, "0")}`;
   } catch {
@@ -125,7 +122,6 @@ const loadCustomerDirectory = () => {
     }
 
     const rows = loadBusinessRows();
-
     const map = new Map();
 
     rows.forEach((row) => {
@@ -226,7 +222,6 @@ function Invoice() {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
   const [generatedInvoice, setGeneratedInvoice] =
     useState(null);
 
@@ -325,10 +320,7 @@ function Invoice() {
       getNumber(tax)
     );
 
-    return (
-      taxableAmount *
-      (taxRate / 100)
-    );
+    return taxableAmount * (taxRate / 100);
   }, [tax, taxableAmount]);
 
   const grandTotal = useMemo(() => {
@@ -439,10 +431,14 @@ function Invoice() {
       if (!alreadyExists) {
         existingCustomers.push({
           name: cleanName,
-          company: customerCompany.trim(),
-          phone: customerPhone.trim(),
-          email: customerEmail.trim(),
-          address: customerAddress.trim(),
+          company:
+            customerCompany.trim(),
+          phone:
+            customerPhone.trim(),
+          email:
+            customerEmail.trim(),
+          address:
+            customerAddress.trim(),
         });
 
         localStorage.setItem(
@@ -474,9 +470,14 @@ function Invoice() {
 
       const transactionRows =
         invoice.items.map((item) => ({
-          invoiceId: invoice.invoiceId,
-          invoiceDate: invoice.invoiceDate,
-          dueDate: invoice.dueDate,
+          invoiceId:
+            invoice.invoiceId,
+
+          invoiceDate:
+            invoice.invoiceDate,
+
+          dueDate:
+            invoice.dueDate,
 
           customerName:
             invoice.customerName,
@@ -514,16 +515,14 @@ function Invoice() {
             invoice.paymentStatus,
 
           paid:
-            invoice.paymentStatus ===
-            "Paid"
+            invoice.paymentStatus === "Paid"
               ? getNumber(
                   invoice.grandTotal
                 )
               : 0,
 
           pending:
-            invoice.paymentStatus ===
-            "Pending"
+            invoice.paymentStatus === "Pending"
               ? getNumber(
                   invoice.grandTotal
                 )
@@ -574,6 +573,7 @@ function Invoice() {
 
     const left = 15;
     const right = 195;
+
     const contentWidth =
       right - left;
 
@@ -636,30 +636,31 @@ function Invoice() {
 
     doc.saveGraphicsState();
 
-doc.setTextColor(
-  240,
-  243,
-  247
-);
+    doc.setTextColor(
+      240,
+      243,
+      247
+    );
 
-doc.setFont(
-  "helvetica",
-  "bold"
-);
+    doc.setFont(
+      "helvetica",
+      "bold"
+    );
 
-doc.setFontSize(82);
+    doc.setFontSize(82);
 
-doc.text(
-  "PULSE IQ",
-  105,
-  190,
-  {
-    align: "center",
-    angle: 45,
-  }
-);
+    doc.text(
+      "PULSE IQ",
+      105,
+      190,
+      {
+        align: "center",
+        angle: 45,
+      }
+    );
 
-doc.restoreGraphicsState();
+    doc.restoreGraphicsState();
+
     /* -----------------------------------------------------
        SELLER HEADER
     ----------------------------------------------------- */
@@ -975,7 +976,6 @@ doc.restoreGraphicsState();
 
     const statusX = 145;
     const statusY = 57;
-
     const statusWidth = 50;
     const statusHeight = 29;
 
@@ -1128,7 +1128,6 @@ doc.restoreGraphicsState();
 
       styles: {
         font: "helvetica",
-
         fontSize: 8.3,
 
         textColor: [
@@ -1249,15 +1248,13 @@ doc.restoreGraphicsState();
       },
     });
 
-    
     /* -----------------------------------------------------
        TOTALS
     ----------------------------------------------------- */
 
     let finalY =
       doc.lastAutoTable?.finalY
-        ? doc.lastAutoTable
-            .finalY + 10
+        ? doc.lastAutoTable.finalY + 10
         : 150;
 
     if (finalY > 235) {
@@ -1280,11 +1277,8 @@ doc.restoreGraphicsState();
       finalY = 25;
     }
 
-    const totalsLabelX =
-      137;
-
-    const totalsValueX =
-      195;
+    const totalsLabelX = 137;
+    const totalsValueX = 195;
 
     doc.setFont(
       "helvetica",
@@ -1679,6 +1673,19 @@ doc.restoreGraphicsState();
     setError("");
     setSuccess("");
 
+    /* -----------------------------------------------------
+       BUSINESS DETAILS ARE MANDATORY
+    ----------------------------------------------------- */
+
+    if (
+      !businessProfile?.companyName?.trim()
+    ) {
+      setError(
+        "Business information is required. Please complete your business details in Settings before generating an invoice."
+      );
+      return;
+    }
+
     if (!customerName.trim()) {
       setError(
         "Please enter customer name."
@@ -1718,7 +1725,9 @@ doc.restoreGraphicsState();
 
     const invoice = {
       invoiceId,
+
       invoiceDate,
+
       dueDate,
 
       customerName:
@@ -1741,14 +1750,17 @@ doc.restoreGraphicsState();
       items: validItems.map(
         (item) => ({
           ...item,
+
           description:
             String(
               item.description
             ).trim(),
+
           quantity:
             getNumber(
               item.quantity
             ),
+
           rate:
             getNumber(
               item.rate
@@ -1871,6 +1883,7 @@ doc.restoreGraphicsState();
 
     setError("");
     setSuccess("");
+
     setGeneratedInvoice(
       null
     );
@@ -1880,6 +1893,11 @@ doc.restoreGraphicsState();
      JSX
   ======================================================= */
 
+  const businessDetailsComplete =
+    Boolean(
+      businessProfile?.companyName?.trim()
+    );
+
   return (
     <div className="dashboard-shell">
       <Sidebar />
@@ -1888,6 +1906,7 @@ doc.restoreGraphicsState();
         <Topbar />
 
         <main className="invoice-page">
+
           {/* =================================================
               PAGE HEADER
           ================================================= */}
@@ -1910,9 +1929,7 @@ doc.restoreGraphicsState();
             </div>
 
             <div className="invoice-id-badge">
-              <FileText
-                size={16}
-              />
+              <FileText size={16} />
 
               <span>
                 {invoiceId}
@@ -1934,9 +1951,7 @@ doc.restoreGraphicsState();
 
           {success && (
             <div className="invoice-alert invoice-success">
-              <CheckCircle
-                size={17}
-              />
+              <CheckCircle size={17} />
 
               <span>
                 {success}
@@ -2177,21 +2192,24 @@ doc.restoreGraphicsState();
 
               <div>
                 <h2>
-                  Business Details
+                  Business Details{" "}
+                  <span className="required-mark">
+                    *
+                  </span>
                 </h2>
 
                 <p>
                   Seller information is taken
                   automatically from Settings.
+                  Complete your business profile
+                  before generating an invoice.
                 </p>
               </div>
             </div>
 
             <div className="invoice-business-preview">
               <div className="invoice-business-preview-icon">
-                <Building2
-                  size={19}
-                />
+                <Building2 size={19} />
               </div>
 
               <div>
@@ -2212,6 +2230,31 @@ doc.restoreGraphicsState();
                 </span>
               </div>
             </div>
+
+            {!businessDetailsComplete && (
+              <div className="invoice-business-warning">
+                <div>
+                  <strong>
+                    Business information required
+                  </strong>
+
+                  <span>
+                    Please add your business information
+                    in Settings before generating an invoice.
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.href =
+                      "/settings";
+                  }}
+                >
+                  Go to Settings
+                </button>
+              </div>
+            )}
           </section>
 
           {/* =================================================
@@ -2360,10 +2403,7 @@ doc.restoreGraphicsState();
               className="invoice-add-item"
               onClick={addItem}
             >
-              <Plus
-                size={16}
-              />
-
+              <Plus size={16} />
               Add Item
             </button>
 
@@ -2656,6 +2696,9 @@ doc.restoreGraphicsState();
                 className="invoice-generate-button"
                 onClick={
                   handleGenerateInvoice
+                }
+                disabled={
+                  !businessDetailsComplete
                 }
               >
                 <Download

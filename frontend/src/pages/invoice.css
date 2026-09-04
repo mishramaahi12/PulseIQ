@@ -1090,3 +1090,94 @@
   border-radius: 7px;
   padding: 5px 9px;
 }
+
+/* =========================================================
+   BUSINESS DETAILS - REQUIRED STATE
+   ========================================================= */
+
+.required-mark {
+  color: #dc2626;
+  font-weight: 900;
+  margin-left: 3px;
+}
+
+.invoice-business-warning {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid #f0caca;
+  border-radius: 11px;
+  background: #fff7f7;
+}
+
+.invoice-business-warning > div {
+  min-width: 0;
+}
+
+.invoice-business-warning strong {
+  display: block;
+  color: #a61b1b;
+  font-size: 12.5px;
+  font-weight: 850;
+}
+
+.invoice-business-warning span {
+  display: block;
+  margin-top: 4px;
+  color: #8a4a4a;
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+.invoice-business-warning button {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid #d73535;
+  border-radius: 8px;
+  background: #dc2626;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.invoice-business-warning button:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.invoice-generate-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.invoice-generate-button:disabled:hover {
+  border-color: #282d34;
+  background: #282d34;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================================================
+   BUSINESS DETAILS RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .invoice-business-warning {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .invoice-business-warning button {
+    width: 100%;
+  }
+}

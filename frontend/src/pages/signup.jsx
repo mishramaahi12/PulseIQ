@@ -44,7 +44,7 @@ function Signup() {
 
     try {
       const response = await fetch(
-        "http://10.45.196.65:8000/signup",
+        "https://pulseiq-ckrc.onrender.com/signup",
         {
           method: "POST",
           headers: {

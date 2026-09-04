@@ -71,6 +71,7 @@ app.add_middleware(
         "http://localhost:5176",
         "http://127.0.0.1:5176",
         "http://10.45.196.65:5173",
+         "https://pulseiq-cyan.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],

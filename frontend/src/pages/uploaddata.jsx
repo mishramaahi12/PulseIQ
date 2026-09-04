@@ -302,7 +302,7 @@ const getStoredUserId = async () => {
   ) {
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/login",
+        "https://pulseiq-ckrc.onrender.com/login",
         {
           method: "POST",
 
@@ -470,7 +470,7 @@ const uploadRowsToBackend = async (
   // --------------------------------------------------
 
   const response = await fetch(
-    "http://127.0.0.1:8000/upload",
+    "https://pulseiq-ckrc.onrender.com/upload",
     {
       method: "POST",
 

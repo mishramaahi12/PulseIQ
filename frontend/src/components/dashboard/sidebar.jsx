@@ -9,6 +9,7 @@ import {
   Sparkles,
   Settings,
   LogOut,
+  ShieldCheck,
 } from "lucide-react";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -18,6 +19,45 @@ import "./sidebar.css";
 function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // =====================================================
+  // CURRENT USER
+  // =====================================================
+
+  let userData = {};
+
+  try {
+    userData = JSON.parse(
+      localStorage.getItem("pulseiq_user") || "{}"
+    );
+  } catch {
+    userData = {};
+  }
+
+  // =====================================================
+  // ADMIN CHECK
+  // =====================================================
+
+  const adminEmail = (
+    import.meta.env.VITE_ADMIN_EMAIL || ""
+  )
+    .trim()
+    .toLowerCase();
+
+  const currentUserEmail = (
+    userData?.email || ""
+  )
+    .trim()
+    .toLowerCase();
+
+  const isAdmin =
+    adminEmail !== "" &&
+    currentUserEmail !== "" &&
+    currentUserEmail === adminEmail;
+
+  // =====================================================
+  // SIDEBAR LINKS
+  // =====================================================
 
   const links = [
     {
@@ -74,9 +114,9 @@ function Sidebar() {
     },
   ];
 
-  // =======================================================
+  // =====================================================
   // LOGOUT
-  // =======================================================
+  // =====================================================
 
   const handleLogout = () => {
     localStorage.removeItem("pulseiq_logged_in");
@@ -85,9 +125,9 @@ function Sidebar() {
     navigate("/login");
   };
 
-  // =======================================================
+  // =====================================================
   // ACTIVE LINK
-  // =======================================================
+  // =====================================================
 
   const isActive = (path) => {
     if (path === "/upload") {
@@ -100,9 +140,9 @@ function Sidebar() {
     return location.pathname === path;
   };
 
-  // =======================================================
+  // =====================================================
   // UI
-  // =======================================================
+  // =====================================================
 
   return (
     <aside className="dashboard-sidebar">
@@ -170,6 +210,34 @@ function Sidebar() {
             </button>
           );
         })}
+
+        {/* =================================================
+            ADMIN
+            ONLY ADMIN CAN SEE THIS
+        ================================================= */}
+
+        {isAdmin && (
+          <button
+            type="button"
+            className={`sidebar-link ${
+              location.pathname === "/admin"
+                ? "active"
+                : ""
+            }`}
+            onClick={() => navigate("/admin")}
+          >
+            <span className="sidebar-link-icon">
+              <ShieldCheck
+                size={18}
+                strokeWidth={1.9}
+              />
+            </span>
+
+            <span className="sidebar-link-text">
+              Admin
+            </span>
+          </button>
+        )}
 
       </nav>
 

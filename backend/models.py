@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
-
+from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey, DateTime
+from datetime import datetime
 from database import Base
 
 
@@ -33,7 +33,54 @@ class User(Base):
         String(255),
         nullable=False
     )
+    created_at = Column(
+    DateTime,
+    default=datetime.utcnow,
+    nullable=False
+)
 
+last_login = Column(
+    DateTime,
+    nullable=True
+)
+
+# =========================================================
+# ACTIVITY LOG
+# =========================================================
+
+class ActivityLog(Base):
+    __tablename__ = "activity_logs"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
+        nullable=False,
+        index=True
+    )
+
+    action = Column(
+        String(100),
+        nullable=False,
+        index=True
+    )
+
+    description = Column(
+        String(500),
+        nullable=True
+    )
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False,
+        index=True
+    )
 
 # =========================================================
 # BUSINESS DATA

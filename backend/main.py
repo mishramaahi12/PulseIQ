@@ -22,7 +22,9 @@ from sqlalchemy.orm import Session
 from google import genai
 
 from database import engine, Base, SessionLocal
-from models import User, BusinessData, Expense
+from models import User, BusinessData, Expense, ActivityLog
+from datetime import datetime
+from fastapi import Header
 
 
 # =========================================================
@@ -214,6 +216,10 @@ def db_test():
 # SIGNUP
 # =========================================================
 
+# =========================================================
+# SIGNUP
+# =========================================================
+
 @app.post("/signup")
 def signup(data: SignupRequest):
 
@@ -265,6 +271,15 @@ def signup(data: SignupRequest):
         db.commit()
         db.refresh(user)
 
+        activity = ActivityLog(
+            user_id=user.id,
+            action="SIGNUP",
+            description="Created a new PulseIQ account."
+        )
+
+        db.add(activity)
+        db.commit()
+
         return {
             "status": "success",
             "message": "Account created successfully.",
@@ -290,6 +305,9 @@ def signup(data: SignupRequest):
     finally:
         db.close()
 
+# =========================================================
+# LOGIN
+# =========================================================
 
 # =========================================================
 # LOGIN
@@ -325,6 +343,17 @@ def login(data: LoginRequest):
                 status_code=401,
                 detail="Invalid email or password."
             )
+
+        user.last_login = datetime.utcnow()
+
+        activity = ActivityLog(
+            user_id=user.id,
+            action="LOGIN",
+            description="Logged into PulseIQ."
+        )
+
+        db.add(activity)
+        db.commit()
 
         return {
             "status": "success",
@@ -2034,30 +2063,20 @@ def dashboard(
 @app.post("/upload")
 async def upload_data(
     file: UploadFile = File(...),
-    x_user_id: int | None = Header(
-        default=None
-    )
+    x_user_id: int | None = Header(default=None)
 ):
+    user_id = require_user_id(x_user_id)
 
-    user_id = require_user_id(
-        x_user_id
-    )
-
-    filename = (
-        file.filename or ""
-    ).strip()
+    filename = (file.filename or "").strip()
 
     if not filename:
-
         raise HTTPException(
             status_code=400,
             detail="No filename provided."
         )
 
     extension = (
-        filename
-        .lower()
-        .split(".")[-1]
+        filename.lower().split(".")[-1]
     )
 
     if extension not in {
@@ -2065,7 +2084,6 @@ async def upload_data(
         "xlsx",
         "xls",
     }:
-
         raise HTTPException(
             status_code=400,
             detail=(
@@ -2077,11 +2095,9 @@ async def upload_data(
     temp_path = None
 
     try:
-
         file_bytes = await file.read()
 
         if not file_bytes:
-
             raise HTTPException(
                 status_code=400,
                 detail="Uploaded file is empty."
@@ -2091,11 +2107,7 @@ async def upload_data(
             delete=False,
             suffix=f".{extension}"
         ) as temp:
-
-            temp.write(
-                file_bytes
-            )
-
+            temp.write(file_bytes)
             temp_path = temp.name
 
         # =================================================
@@ -2103,33 +2115,24 @@ async def upload_data(
         # =================================================
 
         if extension == "csv":
-
             try:
-
                 df = pd.read_csv(
                     temp_path,
                     encoding="utf-8-sig"
                 )
-
             except UnicodeDecodeError:
-
                 df = pd.read_csv(
                     temp_path,
                     encoding="latin1"
                 )
-
         else:
-
-            df = pd.read_excel(
-                temp_path
-            )
+            df = pd.read_excel(temp_path)
 
         # =================================================
         # CLEAN DATAFRAME
         # =================================================
 
         if df.empty:
-
             raise HTTPException(
                 status_code=400,
                 detail=(
@@ -2145,12 +2148,9 @@ async def upload_data(
             for column in df.columns
         ]
 
-        df = df.dropna(
-            how="all"
-        )
+        df = df.dropna(how="all")
 
         if df.empty:
-
             raise HTTPException(
                 status_code=400,
                 detail=(
@@ -2169,9 +2169,29 @@ async def upload_data(
             filename
         )
 
-        analysis = (
-            current_dataset["analysis"]
-        )
+        # =================================================
+        # ACTIVITY LOG
+        # =================================================
+
+        db = SessionLocal()
+
+        try:
+            activity = ActivityLog(
+                user_id=user_id,
+                action="UPLOAD",
+                description=(
+                    f"Uploaded dataset: "
+                    f"{filename} ({saved} rows)"
+                )
+            )
+
+            db.add(activity)
+            db.commit()
+
+        finally:
+            db.close()
+
+        analysis = current_dataset["analysis"]
 
         return {
             "status": "success",
@@ -2181,8 +2201,7 @@ async def upload_data(
             ),
             "filename": filename,
             "rows": saved,
-            "columns":
-                current_dataset["columns"],
+            "columns": current_dataset["columns"],
             "analysis": analysis,
             "source": "actual",
         }
@@ -2191,7 +2210,6 @@ async def upload_data(
         raise
 
     except Exception as e:
-
         print(
             "Upload processing error:",
             repr(e)
@@ -2206,15 +2224,9 @@ async def upload_data(
         )
 
     finally:
-
         if temp_path:
-
             try:
-
-                os.remove(
-                    temp_path
-                )
-
+                os.remove(temp_path)
             except OSError:
                 pass
 
@@ -5679,3 +5691,245 @@ def health():
         "gemini":
             bool(gemini_client),
     }
+
+# ========================================================= 
+# ADMIN ACCESS 
+# ========================================================= 
+ 
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "").strip().lower() 
+ 
+ 
+def require_admin(x_user_id: int | None): 
+    user_id = require_user_id(x_user_id) 
+ 
+    db = SessionLocal() 
+ 
+    try: 
+        user = ( 
+            db.query(User) 
+            .filter(User.id == user_id) 
+            .first() 
+        ) 
+ 
+        if not user: 
+            raise HTTPException( 
+                status_code=404, 
+                detail="User not found." 
+            ) 
+ 
+        if not ADMIN_EMAIL: 
+            raise HTTPException( 
+                status_code=500, 
+                detail="ADMIN_EMAIL is not configured." 
+            ) 
+ 
+        if user.email.strip().lower() != ADMIN_EMAIL: 
+            raise HTTPException( 
+                status_code=403, 
+                detail="Admin access required." 
+            ) 
+ 
+        return user 
+ 
+    finally: 
+        db.close() 
+ 
+ 
+# =========================================================
+# ADMIN ACCESS
+# =========================================================
+
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "").strip().lower()
+
+
+def require_admin(x_user_id: int | None):
+    user_id = require_user_id(x_user_id)
+
+    db = SessionLocal()
+
+    try:
+        user = (
+            db.query(User)
+            .filter(User.id == user_id)
+            .first()
+        )
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found."
+            )
+
+        if not ADMIN_EMAIL:
+            raise HTTPException(
+                status_code=500,
+                detail="ADMIN_EMAIL is not configured."
+            )
+
+        if user.email.strip().lower() != ADMIN_EMAIL:
+            raise HTTPException(
+                status_code=403,
+                detail="Admin access required."
+            )
+
+        return user
+
+    finally:
+        db.close()
+
+
+# =========================================================
+# ADMIN - ALL USERS
+# =========================================================
+
+@app.get("/admin/users")
+def admin_users(
+    x_user_id: int | None = Header(default=None)
+):
+    require_admin(x_user_id)
+
+    db = SessionLocal()
+
+    try:
+        users = (
+            db.query(User)
+            .order_by(User.created_at.desc())
+            .all()
+        )
+
+        return {
+            "status": "success",
+            "users": [
+                {
+                    "id": user.id,
+                    "name": user.name,
+                    "email": user.email,
+                    "created_at": (
+                        user.created_at.isoformat()
+                        if user.created_at
+                        else None
+                    ),
+                    "last_login": (
+                        user.last_login.isoformat()
+                        if user.last_login
+                        else None
+                    ),
+                }
+                for user in users
+            ],
+        }
+
+    finally:
+        db.close()
+
+
+# =========================================================
+# ADMIN - ALL ACTIVITY
+# =========================================================
+
+@app.get("/admin/activity")
+def admin_activity(
+    x_user_id: int | None = Header(default=None)
+):
+    require_admin(x_user_id)
+
+    db = SessionLocal()
+
+    try:
+        activities = (
+            db.query(ActivityLog, User)
+            .join(
+                User,
+                ActivityLog.user_id == User.id
+            )
+            .order_by(
+                ActivityLog.created_at.desc()
+            )
+            .all()
+        )
+
+        return {
+            "status": "success",
+            "activities": [
+                {
+                    "id": activity.id,
+                    "user_id": activity.user_id,
+                    "user_name": user.name,
+                    "user_email": user.email,
+                    "action": activity.action,
+                    "description": activity.description,
+                    "created_at": (
+                        activity.created_at.isoformat()
+                        if activity.created_at
+                        else None
+                    ),
+                }
+                for activity, user in activities
+            ],
+        }
+
+    finally:
+        db.close()
+
+
+# =========================================================
+# ADMIN - USER ACTIVITY
+# =========================================================
+
+@app.get("/admin/users/{user_id}/activity")
+def admin_user_activity(
+    user_id: int,
+    x_user_id: int | None = Header(default=None)
+):
+    require_admin(x_user_id)
+
+    db = SessionLocal()
+
+    try:
+        user = (
+            db.query(User)
+            .filter(User.id == user_id)
+            .first()
+        )
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found."
+            )
+
+        activities = (
+            db.query(ActivityLog)
+            .filter(
+                ActivityLog.user_id == user_id
+            )
+            .order_by(
+                ActivityLog.created_at.desc()
+            )
+            .all()
+        )
+
+        return {
+            "status": "success",
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email,
+            },
+            "activities": [
+                {
+                    "id": activity.id,
+                    "action": activity.action,
+                    "description": activity.description,
+                    "created_at": (
+                        activity.created_at.isoformat()
+                        if activity.created_at
+                        else None
+                    ),
+                }
+                for activity in activities
+            ],
+        }
+
+    finally:
+        db.close()
